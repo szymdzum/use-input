@@ -4,7 +4,7 @@ import "react-router";
 
 declare module "react-router" {
   export interface AppLoadContext {
-    VALUE_FROM_VERCEL: string;
+    SERVER_VALUE: string;
   }
 }
 
@@ -16,7 +16,7 @@ app.use(
     build: () => import("virtual:react-router/server-build"),
     getLoadContext() {
       return {
-        VALUE_FROM_VERCEL: "Hello from Vercel",
+        SERVER_VALUE: "hello from server/app.ts",
       };
     },
   })

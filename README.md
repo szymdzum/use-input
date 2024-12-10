@@ -1,53 +1,116 @@
-# Welcome to React Router!
+# useAnotherFormHook (POC v0.07 alpha)
 
-A modern, production-ready template for building full-stack React applications using React Router.
+When working with forms in web applications, I often don’t need fully-fledged React form libraries. There’s no need to access a form context or even control inputs explicitly. Sometimes, all I need is a simple and lightweight way to manage a few inputs without dragging in a massive dependency.
 
-## Features
+To solve this, I created the yet another useInput hook. Designed with simplicity in mind, it manages the state, validation, and user interaction for a single input. It’s perfect for cases where you’re dealing with 3–4 inputs and want to avoid the overhead of a full form library.
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+### What Does `useInput` Do?
 
-## Getting Started
+The hook attaches itself to an HTMLInputElement’s value and validates it on the blur (focus out) event using a provided validator function. If the criteria are met, it returns null; otherwise, it provides an error message.
 
-### Installation
+Here’s an example:
+```jsx
+const Name = (props: InputProps) => {
+// Validator
+const validateName => (value: string): string | null  => {
+  if (!/^[A-Za-z\s]+$/.test(value)) {
+    return "Name can only contain letters"; // Sorry R2-D2 
+  }
+  return null;
+}
 
-Install the dependencies:
+const {
+  value, // curent input value
+  error, // current error message, null if no error exists
+  validate, // validates value using the validator on blur
+  clear, // updates the value and clears existing errors on change
+} = useInput(validateName);
 
-```bash
-npm install
+return (
+  <div className={styles.field}>
+    <Label />
+    <input
+      value={value}
+      onBlur={validate}
+      onChange={clear}
+      className={`${error ? styles.error : ''}`}
+    />
+    <Message error={error} /> {/* Error message is displayed */}
+  </div>
+}
 ```
 
-### Development
+This hook provides all the tools you need to handle input state and validation logic seamlessly.
 
-Start the development server with HMR:
+### Composition
 
-```bash
-npm run dev
+When each input manages itself internally, it doesn’t need to be aware of its surroundings. This enables clean and elegant compositions, which was one of my primary goals. Its nice to look at.
+
+```jsx
+<Form>
+  <Email />
+  <Password />
+  <Submit />
+</Form>
 ```
 
-Your application will be available at `http://localhost:5173`.
+### Web API Integration
 
-## Building for Production
+Instead of relying on context or controlled inputs, let the Web API do what it does best: handle form submissions natively. As a wise man once said, “If it ain’t broke, don’t fix it." 
 
-Create a production build:
+```html
+<form action="POST">
+  <input name="firstName" />
+  <button type="submit">Send</button>
+</form>
+```
+You can then access the form data on the action like this:
 
-```bash
-npm run build
+```js
+const formData = await request.formData();
 ```
 
-## Deployment
+## ✨ Key Objectives
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjacob-ebey%2Freact-router-templates%2Ftree%2Fmain%2Fvercel&project-name=my-react-router-app&repository-name=my-react-router-app)
+### Native Form Handling
 
-## Styling
+Harness the power of Web APIs wherever possible. This library embraces web standards, ensuring forms are accessible, user-friendly, and dependency-light.
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+### Client & Server Validation
+
+Validation should happen everywhere. Whether it’s the client or server, your data is getting a solid once-over.
+
+### Minimal React Dependency
+
+React is here to help—but only with the small stuff, like:
+- Rendering error messages.
+- Sprinkling on some UI enhancements.
+
+React will NOT manage form state or submission logic. Web standards got this!
+
+### Copy Paste
+
+I'm on board with latest trend of just allowing code fragments to be CtrlC CtrlV into other projects. Take what you need, modify to your liking, 
+
+### Preconfigured Inputs
+
+Inputs should work out of the box. Default values? Pre-set attributes? Yes, please. Of course, you can tweak them all you want—just like the perfect pizza topping. 🍕
+
+### Modern Tooling
+
+This project is a playground for the coolest, shiniest toys:
+-	React Router v7
+- React 19
+- Vanilla CSS (you can use Tailwind if you must)
+
+## 🌟 Why Another Form Library?
+
+Because sometimes, it’s not about solving a problem. Sometimes, it’s about chasing an idea that makes you smile. If you like forms that are simple, composable, and unapologetically biased toward looking good, might just be for you. Stay tuned!
+
+Pull requests, ideas, and criticisms are welcome!
+(It’s still a baby project.)
 
 ---
 
-Built with ❤️ using React Router.
+Cheers!
+Szymon
