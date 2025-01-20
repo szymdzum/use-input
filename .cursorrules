@@ -1,0 +1,107 @@
+version: 1.0
+
+# Development Workflow
+workflow:
+  approach: iterative
+  steps:
+    - understand_requirements
+    - implement_basic_solution
+    - refine_iteratively
+    - validate_accessibility
+
+# Component Structure
+components:
+  structure: atomic
+  naming:
+    pattern: PascalCase
+    examples:
+      - Input.Field
+      - Input.Label
+      - Input.Control
+  composition:
+    prefer: children
+    avoid: redundant-props
+
+# Styling Rules
+styling:
+  units:
+    spacing: rem
+    borders: px
+  selectors:
+    prefer:
+      - semantic-elements     # div, input, label
+      - simple-cascading     # parent > child
+    avoid:
+      - unnecessary-classes
+  restrictions:
+    avoid:
+      - font-sizes
+      - colors
+      - theme-specific-styles
+
+# TypeScript Guidelines
+typescript:
+  props:
+    style: type              # prefer type over interface
+    required:
+      - name                 # for form elements
+      - accessibility-attrs  # aria-* attributes
+
+  error_handling:
+    pattern: children-based
+    example: <Input.Error>{error}</Input.Error>
+
+# Accessibility
+accessibility:
+  requirements:
+    - aria-labels
+    - role-attributes
+    - focus-management
+  id_generation:
+    pattern: "${name}-${purpose}"
+    example: "email-description"
+
+# CSS Modules
+css_modules:
+  file_pattern: "*.module.css"
+  naming:
+    avoid: semantic-meaning
+    prefer: functional-purpose
+  cascade:
+    prefer: natural-html
+    avoid: class-specificity
+
+# Hook Guidelines
+hooks:
+  structure:
+    - single-responsibility
+    - reusable
+    - lightweight
+  validation:
+    prefer: external-validators
+    pattern: "(value) => error | null"
+
+# Input Components
+input:
+  composition:
+    required:
+      - Field
+      - Label
+      - Control
+    optional:
+      - Error
+      - Description
+  visibility:
+    error: children-based
+    description: error-dependent
+
+# Code Style
+style:
+  principles:
+    - minimalism
+    - modularity
+    - clarity
+  formatting:
+    max_line_length: 80
+    quotes: single
+    semicolons: always

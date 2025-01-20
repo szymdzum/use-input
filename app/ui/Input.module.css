@@ -1,0 +1,28 @@
+div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  margin-bottom: 0.25rem;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+input:focus {
+  outline: 2px solid transparent;
+}
+
+div[role="alert"] {
+  margin-top: 0.25rem;
+}
+
+div[id*="description"] {
+  margin-top: 0.25rem;
+}

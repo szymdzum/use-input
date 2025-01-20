@@ -2,6 +2,7 @@ import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import type { Route } from "./+types/home";
 
 import { Button } from "../components/Button";
+import { TextInput } from "~/ui/TextInput";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "useInputValueHook" },
@@ -28,6 +29,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
       <p>{loaderData.message}</p>
       <CodeSnippet />
+      <TextInput
+        name="username"
+        label="Username"
+        validator={(value: string) => value.length < 3 ? "Username too short" : null}
+        description="Must be at least 3 characters long"
+        placeholder="Enter username"
+      />
     </div>
   );
 }

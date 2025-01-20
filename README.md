@@ -4,8 +4,6 @@ When working with forms in web applications, I often don’t need fully-fledged 
 
 To solve this, I created the yet another useInput hook. Designed with simplicity in mind, it manages the state, validation, and user interaction for a single input. It’s perfect for cases where you’re dealing with 3–4 inputs and want to avoid the overhead of a full form library.
 
-### What Does `useInput` Do?
-
 The hook attaches itself to an HTMLInputElement’s value and validates it on the blur (focus out) event using a provided validator function. If the criteria are met, it returns null; otherwise, it provides an error message.
 
 Here’s an example:
