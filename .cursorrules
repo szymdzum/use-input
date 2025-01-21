@@ -1,13 +1,28 @@
 version: 1.0
 
+# Repository Entry Point Rules
+documentation:
+  - required_reference:
+      path: ./docs
+      files:
+        - project-overview.md
+        - planning/step-by-step-plan.md
+        - guidelines/development-guidelines.md
+        - changelog/changelog.md
+  - validation:
+      step: pre-execution
+      action: check .cursorrules and docs/ before modifications
+
 # Development Workflow
 workflow:
   approach: iterative
   steps:
     - understand_requirements
+    - consult_documentation
     - implement_basic_solution
     - refine_iteratively
     - validate_accessibility
+    - update_changelog
 
 # Component Structure
 components:

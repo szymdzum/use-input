@@ -27,8 +27,8 @@ export const useInputValue = (
   );
 
   // Server-side validation handling
+  const errorMessage = useServerValidation(inputName || '');
   if (inputName) {
-    const errorMessage = useServerValidation(inputName);
     useEffect(() => {
       if (errorMessage) {
         setError(errorMessage);
@@ -63,7 +63,9 @@ export const useInputValue = (
     [error]
   );
 
-  const isValid = isDirty && !error && value.length > 0;
+  const isValid = useMemo(() => {
+    return error === null && value.trim().length > 0;
+  }, [error, value]);
 
   const validationResult = useMemo(
     () => ({

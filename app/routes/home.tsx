@@ -17,16 +17,6 @@ export function loader({ context }: Route.LoaderArgs) {
 export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <div>
-      <h1>useInputValue</h1>
-      <em>Hook for managing form input state and validation.</em>
-      <p>
-        The hook attaches itself to an <code>HTMLInputElement</code>’s value and
-        validates it on
-        <code> onBlur</code> event using a provided validator function. If the
-        criteria are met, it returns
-        <code> null</code>; otherwise, it provides an error message.
-      </p>
-
       <p>{loaderData.message}</p>
       <CodeSnippet />
       <TextInput
