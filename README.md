@@ -1,114 +1,57 @@
-# useAnotherFormHook (POC v0.07 alpha)
+# useInput
 
-When working with forms in web applications, I often don’t need fully-fledged React form libraries. There’s no need to access a form context or even control inputs explicitly. Sometimes, all I need is a simple and lightweight way to manage a few inputs without dragging in a massive dependency.
+A minimalist approach to input handling in React. When you need just one input field managed properly without the overhead of full-form libraries - this is your solution.
 
-To solve this, I created the yet another useInput hook. Designed with simplicity in mind, it manages the state, validation, and user interaction for a single input. It’s perfect for cases where you’re dealing with 3–4 inputs and want to avoid the overhead of a full form library.
+## Key Features
+- 🪶 Lightweight (under 2KB gzipped)
+- 🎯 Single responsibility: Manage one input perfectly
+- ⚡ React 19 optimized
+- 🧩 Remix & React Router compatible
+- Zero dependencies
 
-The hook attaches itself to an HTMLInputElement’s value and validates it on the blur (focus out) event using a provided validator function. If the criteria are met, it returns null; otherwise, it provides an error message.
-
-Here’s an example:
+## Example Usage
 ```jsx
-const Name = (props: InputProps) => {
-// Validator
-const validateName => (value: string): string | null  => {
-  if (!/^[A-Za-z\s]+$/.test(value)) {
-    return "Name can only contain letters"; // Sorry R2-D2 
-  }
-  return null;
+import { useInput } from './app/hooks/useInputValue';
+
+function emailValidator(value) {
+  return value.includes('@') ? null : 'Invalid email address';
 }
 
-const {
-  value, // curent input value
-  error, // current error message, null if no error exists
-  validate, // validates value using the validator on blur
-  clear, // updates the value and clears existing errors on change
-} = useInput(validateName);
+function EmailField() {
+  const { value, validate, error, clear } = useInput(emailValidator);
 
-return (
-  <div className={styles.field}>
-    <Label />
-    <input
-      value={value}
-      onBlur={validate}
-      onChange={clear}
-      className={`${error ? styles.error : ''}`}
-    />
-    <Message error={error} /> {/* Error message is displayed */}
-  </div>
+  return (
+    <div className="input-group">
+      <label htmlFor="email">Email:</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        value={value}
+        onChange={clear}
+        onBlur={validate}
+        aria-describedby="email-error"
+      />
+      {error && <span id="email-error" role="alert">{error}</span>}
+    </div>
+  );
 }
 ```
 
-This hook provides all the tools you need to handle input state and validation logic seamlessly.
+## Why useInput?
+While libraries like `react-hook-form` are excellent for complex forms, they bring unnecessary weight when you just need:
+- Simple validation for a few fields
+- Basic error handling
+- Clean state management
+- Accessibility-ready components
 
-### Composition
+## Documentation
+Full documentation available in [docs/](docs/):
+- Project structure
+- Development guidelines
+- Changelog
 
-When each input manages itself internally, it doesn’t need to be aware of its surroundings. This enables clean and elegant compositions, which was one of my primary goals. Its nice to look at.
-
-```jsx
-<Form>
-  <Email />
-  <Password />
-  <Submit />
-</Form>
-```
-
-### Web API Integration
-
-Instead of relying on context or controlled inputs, let the Web API do what it does best: handle form submissions natively. As a wise man once said, “If it ain’t broke, don’t fix it." 
-
-```html
-<form action="POST">
-  <input name="firstName" />
-  <button type="submit">Send</button>
-</form>
-```
-You can then access the form data on the action like this:
-
-```js
-const formData = await request.formData();
-```
-
-## ✨ Key Objectives
-
-### Native Form Handling
-
-Harness the power of Web APIs wherever possible. This library embraces web standards, ensuring forms are accessible, user-friendly, and dependency-light.
-
-### Client & Server Validation
-
-Validation should happen everywhere. Whether it’s the client or server, your data is getting a solid once-over.
-
-### Minimal React Dependency
-
-React is here to help—but only with the small stuff, like:
-- Rendering error messages.
-- Sprinkling on some UI enhancements.
-
-React will NOT manage form state or submission logic. Web standards got this!
-
-### Copy Paste
-
-I'm on board with latest trend of just allowing code fragments to be CtrlC CtrlV into other projects. Take what you need, modify to your liking, 
-
-### Preconfigured Inputs
-
-Inputs should work out of the box. Default values? Pre-set attributes? Yes, please. Of course, you can tweak them all you want—just like the perfect pizza topping. 🍕
-
-### Modern Tooling
-
-This project is a playground for the coolest, shiniest toys:
--	React Router v7
-- React 19
-- Vanilla CSS (you can use Tailwind if you must)
-
-## 🌟 Why Another Form Library?
-
-Because sometimes, it’s not about solving a problem. Sometimes, it’s about chasing an idea that makes you smile. If you like forms that are simple, composable, and unapologetically biased toward looking good, might just be for you. Stay tuned!
-
-Pull requests, ideas, and criticisms are welcome!
-(It’s still a baby project.)
-
----
-
-Cheers!
-Szymon
+## Contributing
+1. Review [development guidelines](docs/guidelines/development-guidelines.md)
+2. Update [changelog](docs/changelog/changelog.md) with changes
+3. Submit PR with description of changes
