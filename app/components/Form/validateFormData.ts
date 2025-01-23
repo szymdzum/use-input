@@ -32,7 +32,7 @@ export function validateFormData<Schema extends FormSchema>(
 
   for (const [key, validator] of Object.entries(schema)) {
     const value = formData.get(key);
-    const stringValue = value?.toString().trim() ?? "";
+    const stringValue = value?.toString().trim() ?? '';
 
     const error = validator(stringValue);
     if (error) {

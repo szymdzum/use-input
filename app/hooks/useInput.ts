@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useActionData } from "react-router";
-import type { InputChange, InputFocus, Validator } from "./types";
-
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import type {  InputChange, InputFocus, Validator } from './types';
+import { useServerValidation } from './useServerValidation';
 /**
  * Hooks into inputs value and manages its validation state
  * @param {Validator} [validator] - Function to validate the input value
@@ -10,32 +9,30 @@ import type { InputChange, InputFocus, Validator } from "./types";
  * @example
  * const { value, error, validate, clear } = useInputValue(validator);
  */
-export const useInputValue = (
+export const useInput = (
   validator: Validator,
   inputName?: string,
 ): ValidationResult => {
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isDirty, setIsDirty] = useState(false);
 
   // Helper function to get trimmed value from event
   const getInputValue = useCallback(
     (event: InputChange | InputFocus): string => {
-      return event?.target?.value?.trim() ?? "";
+      return event?.target?.value?.trim() ?? '';
     },
     [],
   );
 
   // Server-side validation handling
-  const errorMessage = useServerValidation(inputName || "");
-  if (inputName) {
-    useEffect(() => {
-      if (errorMessage) {
-        setError(errorMessage);
-        setIsDirty(true);
-      }
-    }, [errorMessage]);
-  }
+  const errorMessage = useServerValidation(inputName || '');
+  useEffect(() => {
+    if (inputName && errorMessage) {
+      setError(errorMessage);
+      setIsDirty(true);
+    }
+  }, [inputName, errorMessage]);
 
   const validate = useCallback(
     (event: InputFocus) => {
@@ -101,18 +98,4 @@ type ValidationResult = {
    * @param event The change event object
    */
   clear: (event: InputChange) => void;
-};
-
-type ServerValidation = {
-  errors?: Record<string, string>;
-};
-
-/**
- * Hook to handle server-side validation errors for a specific form field
- * @param {string} [inputName] - fieldId to map to the server-side errors
- * @returns {string | null} Error message for the field, or null if no error exists
- */
-export const useServerValidation = (inputName: string): string | null => {
-  const validationResponse = useActionData<ServerValidation>();
-  return validationResponse?.errors?.[inputName] ?? null;
 };

@@ -1,6 +1,60 @@
 version: 1.0
 
+######################################################################
+#                      !! IMPORTANT - PLEASE READ !!
+######################################################################
+#
+#  COMPULSORY: Review and adhere to the rules in this file before
+#              making any modifications to the codebase.
+#
+#  This file serves as the central source of truth for project standards
+#  and guidelines. Ignoring these rules can lead to inconsistencies,
+#  accessibility issues, and technical debt.
+#
+#  CORE TECHNOLOGIES & SETUP:
+#
+#   - JavaScript Runtime: PNPM is REQUIRED for package management.
+#     Use 'pnpm install' to install dependencies.
+#
+#   - TypeScript: Ensure type-safe code and strict type checking.
+#     Refer to tsconfig.json for recommended settings.
+#
+#   - Biome: Enforces linting, formatting, and advanced code rules.
+#     Run 'pnpm biome check --write' to lint and auto-fix code.
+#
+#   - Prettier:  Integrated into Biome for consistent code formatting.
+#
+#  By proceeding, you acknowledge that you have read and understood
+#  the rules outlined in this file and are committed to following them.
+#
+######################################################################
+
+######################################################################
+# COMPULSORY DEVELOPMENT NOTES:
+# - Core technologies include React (with hooks), TypeScript, PNPM.
+# - Linting and formatting rules follow Biome and Prettier configurations.
+# - Strict TypeScript rules are enforced to avoid runtime errors.
+# - Use React best practices: typed hooks, context, and generics.
+######################################################################
+
+# Mandatory Linting Rules:
+# - Biome is configured to check the following:
+#   - Enforce `return-await` in async functions.
+#   - Ensure `noImplicitAny` and other strict TypeScript settings.
+#   - Format code with Prettier automatically.
+# - Run `pnpm biome check --write` before commits to auto-fix issues.
+
+# Testing Requirements:
+# - All PRs require passing tests before merging.
+# - Use `pnpm test` to run unit tests.
+
 # Repository Entry Point Rules
+# Always start from here
+
+on_init:
+  step: rules, reminders and reasons
+  action: check .cursorrules and docs/ before each modification
+
 documentation:
   - required_reference:
       path: ./docs
@@ -9,9 +63,6 @@ documentation:
         - planning/step-by-step-plan.md
         - guidelines/development-guidelines.md
         - changelog/changelog.md
-  - validation:
-      step: pre-execution
-      action: check .cursorrules and docs/ before modifications
 
 # Development Workflow
 workflow:
@@ -44,8 +95,8 @@ styling:
     borders: px
   selectors:
     prefer:
-      - semantic-elements     # div, input, label
-      - simple-cascading     # parent > child
+      - semantic-elements # div, input, label
+      - simple-cascading # parent > child
     avoid:
       - unnecessary-classes
   restrictions:
@@ -57,10 +108,10 @@ styling:
 # TypeScript Guidelines
 typescript:
   props:
-    style: type              # prefer type over interface
+    style: type # prefer type over interface
     required:
-      - name                 # for form elements
-      - accessibility-attrs  # aria-* attributes
+      - name # for form elements
+      - accessibility-attrs # aria-* attributes
 
   error_handling:
     pattern: children-based

@@ -1,4 +1,8 @@
-import "./Input.module.css";
+import type React from 'react';
+import './Input.module.css';
+import type { ChangeEvent } from 'react';
+import type { InputChange } from '~/hooks/types';
+import type { InputFocus } from '~/hooks/types';
 
 // Utility function
 const getDescriptionId = (inputName: string) => `${inputName}-description`;
@@ -20,13 +24,13 @@ type ControlProps = {
   name: string;
   type?: string;
   value?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   className?: string;
   placeholder?: string;
-  "aria-describedby"?: string;
-  "aria-invalid"?: boolean;
-  "aria-label"?: string;
+  onChange: (event: InputChange) => void;
+  onBlur?: (event: InputFocus) => void;
+  'aria-describedby'?: string;
+  'aria-invalid'?: boolean;
+  'aria-label'?: string;
 };
 
 type ErrorProps = {
@@ -51,14 +55,14 @@ const Label = ({ children, htmlFor }: LabelProps) => (
 const Control = ({
   id,
   name,
-  type = "text",
+  type,
   value,
   onChange,
   onBlur,
   placeholder,
-  "aria-describedby": ariaDescribedby,
-  "aria-invalid": ariaInvalid,
-  "aria-label": ariaLabel,
+  'aria-describedby': ariaDescribedby,
+  'aria-invalid': ariaInvalid,
+  'aria-label': ariaLabel,
   ...props
 }: ControlProps) => (
   <input
@@ -77,18 +81,22 @@ const Control = ({
 );
 
 const ErrorMessage = ({ children }: ErrorProps) => {
-  if (!children) return null;
+  if (!children) {
+    return null;
+  }
 
   return <div role="alert">{children}</div>;
 };
 
 const Description = ({ error, inputName, children }: DescriptionProps) => {
-  if (error || !children) return null;
+  if (error || !children) {
+    return null;
+  }
 
   return <div id={getDescriptionId(inputName)}>{children}</div>;
 };
 
-// Compose the Input namespace object
+// Input namespace
 export const Input = {
   Field,
   Label,
