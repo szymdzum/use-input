@@ -1,5 +1,5 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useActionData } from "react-router";
-import { useState, useCallback, useEffect, useMemo } from "react";
 import type { InputChange, InputFocus, Validator } from "./types";
 
 /**
@@ -12,7 +12,7 @@ import type { InputChange, InputFocus, Validator } from "./types";
  */
 export const useInputValue = (
   validator: Validator,
-  inputName?: string
+  inputName?: string,
 ): ValidationResult => {
   const [value, setValue] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -23,11 +23,11 @@ export const useInputValue = (
     (event: InputChange | InputFocus): string => {
       return event?.target?.value?.trim() ?? "";
     },
-    []
+    [],
   );
 
   // Server-side validation handling
-  const errorMessage = useServerValidation(inputName || '');
+  const errorMessage = useServerValidation(inputName || "");
   if (inputName) {
     useEffect(() => {
       if (errorMessage) {
@@ -47,7 +47,7 @@ export const useInputValue = (
         setError(null);
       }
     },
-    [validator]
+    [validator, getInputValue],
   );
 
   // Clears error on input onChange
@@ -60,7 +60,7 @@ export const useInputValue = (
         setError(null);
       }
     },
-    [error]
+    [error, getInputValue],
   );
 
   const isValid = useMemo(() => {
@@ -76,7 +76,7 @@ export const useInputValue = (
       isValid,
       isDirty,
     }),
-    [value, error, clear, validate, isValid, isDirty]
+    [value, error, clear, validate, isValid, isDirty],
   );
 
   return validationResult;

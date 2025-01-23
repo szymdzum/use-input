@@ -1,9 +1,9 @@
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import type { Route } from "./+types/home";
 
-import { Button } from "../components/Button";
 import { TextInput } from "~/ui/TextInput";
-export function meta({}: Route.MetaArgs) {
+import { Button } from "../components/Button";
+export function meta(_: Route.MetaArgs) {
   return [
     { title: "useInputValueHook" },
     { name: "description", content: "Welcome to React Router!" },
@@ -22,7 +22,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <TextInput
         name="username"
         label="Username"
-        validator={(value: string) => value.length < 3 ? "Username too short" : null}
+        validator={(value: string) =>
+          value.length < 3 ? "Username too short" : null
+        }
         description="Must be at least 3 characters long"
         placeholder="Enter username"
       />
@@ -32,7 +34,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
 const CodeSnippet = () => {
   const scope = { Button };
-  const code = `<Button>Hello Button</Button>`;
+  const code = "<Button>Hello Button</Button>";
 
   return (
     <div className="rounded-lg my-5 shadow-md">

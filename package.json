@@ -4,7 +4,10 @@
   "scripts": {
     "build": "react-router build && node vercel/prepare.js",
     "dev": "cross-env NODE_ENV=development node ./dev-server.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "lint": "biome lint --write",
+    "format": "biome format --write",
+    "check": "biome check --write"
   },
   "dependencies": {
     "@react-router/express": "*",
@@ -18,6 +21,7 @@
     "react-router": "*"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@react-router/dev": "*",
     "@types/express": "^5.0.0",
     "@types/node": "^20",

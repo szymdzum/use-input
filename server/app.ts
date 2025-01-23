@@ -19,7 +19,7 @@ app.use(
         SERVER_VALUE: "hello from server/app.ts",
       };
     },
-  })
+  }),
 );
 
 export default app;

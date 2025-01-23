@@ -1,6 +1,6 @@
-import { Input } from './Input';
-import { useInputValue } from '../hooks/useInputValue';
-import type { Validator } from '../hooks/types';
+import type { Validator } from "../hooks/types";
+import { useInputValue } from "../hooks/useInputValue";
+import { Input } from "./Input";
 
 type TextInputProps = {
   name: string;
@@ -17,13 +17,15 @@ export const TextInput = ({
   validator,
   description,
   placeholder,
-  className
+  className,
 }: TextInputProps) => {
-  const { value, error, clear, validate, isDirty } = useInputValue(validator, name);
+  const { value, error, clear, validate, isDirty } = useInputValue(
+    validator,
+    name,
+  );
 
   return (
     <Input.Field className={className}>
-
       <Input.Label htmlFor={name}>{label}</Input.Label>
 
       <Input.Control
@@ -33,7 +35,9 @@ export const TextInput = ({
         onChange={clear}
         onBlur={validate}
         placeholder={placeholder}
-        aria-describedby={description ? Input.getDescriptionId(name) : undefined}
+        aria-describedby={
+          description ? Input.getDescriptionId(name) : undefined
+        }
         aria-invalid={isDirty && !!error}
       />
 
@@ -42,7 +46,6 @@ export const TextInput = ({
       <Input.Description error={error} inputName={name}>
         {description}
       </Input.Description>
-
     </Input.Field>
   );
 };

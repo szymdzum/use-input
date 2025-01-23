@@ -1,7 +1,6 @@
+import type { ErrorInfo } from "react";
 import { Form as BaseForm } from "react-router";
-import { ErrorBoundary } from '../ErrorBoundary';
-import type { ErrorInfo } from 'react';
-
+import { ErrorBoundary } from "../ErrorBoundary";
 
 type FormProps = {
   method?: "POST" | "GET" | "PUT" | "PATCH" | "DELETE";
@@ -22,7 +21,9 @@ const Form = ({ method = "POST", noValidate = true, ...props }: FormProps) => (
         Form submission failed. Please try again.
       </div>
     }
-    onError={(error: Error, info: ErrorInfo) => console.error('Form Error:', error, info)}
+    onError={(error: Error, info: ErrorInfo) =>
+      console.error("Form Error:", error, info)
+    }
   >
     <BaseForm method={method} noValidate={noValidate} {...props} />
   </ErrorBoundary>

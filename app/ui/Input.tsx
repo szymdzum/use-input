@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './Input.module.css';
+import "./Input.module.css";
 
 // Utility function
 const getDescriptionId = (inputName: string) => `${inputName}-description`;
@@ -25,9 +24,9 @@ type ControlProps = {
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   className?: string;
   placeholder?: string;
-  'aria-describedby'?: string;
-  'aria-invalid'?: boolean;
-  'aria-label'?: string;
+  "aria-describedby"?: string;
+  "aria-invalid"?: boolean;
+  "aria-label"?: string;
 };
 
 type ErrorProps = {
@@ -43,9 +42,7 @@ type DescriptionProps = {
 };
 
 // Components
-const Field = ({ children }: FieldProps) => (
-  <div>{children}</div>
-);
+const Field = ({ children }: FieldProps) => <div>{children}</div>;
 
 const Label = ({ children, htmlFor }: LabelProps) => (
   <label htmlFor={htmlFor}>{children}</label>
@@ -54,14 +51,14 @@ const Label = ({ children, htmlFor }: LabelProps) => (
 const Control = ({
   id,
   name,
-  type = 'text',
+  type = "text",
   value,
   onChange,
   onBlur,
   placeholder,
-  'aria-describedby': ariaDescribedby,
-  'aria-invalid': ariaInvalid,
-  'aria-label': ariaLabel,
+  "aria-describedby": ariaDescribedby,
+  "aria-invalid": ariaInvalid,
+  "aria-label": ariaLabel,
   ...props
 }: ControlProps) => (
   <input
@@ -79,24 +76,16 @@ const Control = ({
   />
 );
 
-const Error = ({ children }: ErrorProps) => {
+const ErrorMessage = ({ children }: ErrorProps) => {
   if (!children) return null;
 
-  return (
-    <div role="alert">
-      {children}
-    </div>
-  );
+  return <div role="alert">{children}</div>;
 };
 
 const Description = ({ error, inputName, children }: DescriptionProps) => {
   if (error || !children) return null;
 
-  return (
-    <div id={getDescriptionId(inputName)}>
-      {children}
-    </div>
-  );
+  return <div id={getDescriptionId(inputName)}>{children}</div>;
 };
 
 // Compose the Input namespace object
@@ -104,7 +93,7 @@ export const Input = {
   Field,
   Label,
   Control,
-  Error,
+  ErrorMessage,
   Description,
   getDescriptionId,
 };

@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import type { ErrorInfo, ReactNode } from 'react';
+import { Component } from "react";
+import type { ErrorInfo, ReactNode } from "react";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -11,7 +11,10 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   state = { hasError: false };
 
   static getDerivedStateFromError(_: Error): ErrorBoundaryState {

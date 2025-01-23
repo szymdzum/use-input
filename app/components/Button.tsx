@@ -4,11 +4,7 @@ type ButtonProps = {
   children: React.ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-
-const Button = ({
-  type = "button",
-  children,
-}: ButtonProps) => {
+const Button = ({ type = "button", children }: ButtonProps) => {
   return (
     <button
       type={type}
