@@ -5,11 +5,13 @@ import { describe, it, expect } from 'vitest';
 describe('useInput', () => {
   it('should handle input changes', () => {
     const { result } = renderHook(() => useInput({ initialValue: '' }));
-    
+
     act(() => {
-      result.current.onChange({ target: { value: 'test' } } as React.ChangeEvent<HTMLInputElement>);
+      result.current.onChange({
+        target: { value: 'test' },
+      } as React.ChangeEvent<HTMLInputElement>);
     });
-    
+
     expect(result.current.value).toBe('test');
   });
 });

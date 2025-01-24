@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, type ChangeEvent } from 'react';
 
 interface UseInputProps {
   initialValue?: string;
