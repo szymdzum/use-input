@@ -1,6 +1,7 @@
-import type { Validator } from '../hooks/types';
-import { useInput } from '../hooks/useInput';
-import { Input } from './Input';
+import { useInput } from '../../hooks/useInput';
+import { Input } from '../Input/Input';
+
+import type { Validator } from 'app/types';
 
 type TextFieldProps = {
   name: string;

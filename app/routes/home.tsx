@@ -1,4 +1,4 @@
-import { TextField } from '~/ui/TextInput';
+import { TextField } from '~/ui/TextInput/TextInput';
 import type { Route } from './+types/home';
 
 export function meta(_: Route.MetaArgs) {

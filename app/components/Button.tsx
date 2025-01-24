@@ -1,6 +1,4 @@
-import React from 'react';
-import type { ButtonHTMLAttributes } from 'react';
-import type { ButtonProps } from '../types/types'; // Adjust the path as necessary
+import type { ButtonProps } from 'app/types';
 
 const Button = ({ type = 'button', children }: ButtonProps) => {
   return (

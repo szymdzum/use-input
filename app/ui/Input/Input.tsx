@@ -1,19 +1,18 @@
-import type React from 'react';
-import './Input.module.css';
-import type { InputChange } from '~/hooks/types';
-import type { InputFocus } from '~/hooks/types';
+import styles from './Input.module.css';
+
+import type { InputChange, InputFocus, ReactChildren } from 'app/types';
 
 // Utility function
 const getDescriptionId = (inputName: string) => `${inputName}-description`;
 
 // Types
 type FieldProps = {
-  children: React.ReactNode;
+  children: ReactChildren;
   className?: string;
 };
 
 type LabelProps = {
-  children: React.ReactNode;
+  children: ReactChildren;
   className?: string;
   htmlFor?: string;
 };
@@ -33,19 +32,19 @@ type ControlProps = {
 };
 
 type ErrorProps = {
-  children?: React.ReactNode;
+  children?: ReactChildren;
   className?: string;
 };
 
 type DescriptionProps = {
   error: string | null;
   inputName: string;
-  children: React.ReactNode;
+  children: ReactChildren;
   className?: string;
 };
 
 // Components
-const Field = ({ children }: FieldProps) => <div>{children}</div>;
+const Field = ({ children }: FieldProps) => <div className={styles.field}>{children}</div>;
 
 const Label = ({ children, htmlFor }: LabelProps) => (
   <label htmlFor={htmlFor}>{children}</label>

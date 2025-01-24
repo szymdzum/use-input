@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import type {  InputChange, InputFocus, Validator } from './types';
 import { useServerValidation } from './useServerValidation';
+
+import type { InputChange, InputFocus, Validator } from 'app/types';
 /**
  * Hooks into inputs value and manages its validation state
  * @param {Validator} [validator] - Function to validate the input value
