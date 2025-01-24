@@ -42,7 +42,7 @@ jobs:
           fi
           
       - name: Generate React Router Types
-        run: pnpm remix-router types
+        run: pnpm react-router typegen
         
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
@@ -82,7 +82,7 @@ jobs:
           fi
 
       - name: Generate React Router Types
-        run: pnpm remix-router types
+        run: pnpm react-router typegen
         
       - name: Run tests
         run: pnpm test -- --coverage
@@ -121,7 +121,7 @@ jobs:
           fi
 
       - name: Generate React Router Types
-        run: pnpm remix-router types
+        run: pnpm react-router typegen
         
       - name: Build
         run: pnpm build
