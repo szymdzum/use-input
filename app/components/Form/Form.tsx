@@ -1,10 +1,10 @@
-import { Form as BaseForm } from "react-router";
-import { ErrorBoundary } from '../ErrorBoundary';
+import type React from 'react';
 import type { ErrorInfo } from 'react';
-
+import { Form as BaseForm } from 'react-router';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 type FormProps = {
-  method?: "POST" | "GET" | "PUT" | "PATCH" | "DELETE";
+  method?: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
   noValidate?: boolean;
   children: React.ReactNode;
   /** Custom fallback UI for error boundary */
@@ -15,20 +15,22 @@ type FormProps = {
   onError?: React.FormEventHandler<HTMLFormElement>;
 };
 
-const Form = ({ method = "POST", noValidate = true, ...props }: FormProps) => (
+const Form = ({ method = 'POST', noValidate = true, ...props }: FormProps) => (
   <ErrorBoundary
     fallback={
       <div role="alert" aria-live="polite" className="form-error">
         Form submission failed. Please try again.
       </div>
     }
-    onError={(error: Error, info: ErrorInfo) => console.error('Form Error:', error, info)}
+    onError={(error: Error, info: ErrorInfo) =>
+      console.error('Form Error:', error, info)
+    }
   >
     <BaseForm method={method} noValidate={noValidate} {...props} />
   </ErrorBoundary>
 );
 
-Form.displayName = "Form";
+Form.displayName = 'Form';
 
 export { Form };
 export type { FormProps };

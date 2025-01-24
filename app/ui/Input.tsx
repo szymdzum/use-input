@@ -1,5 +1,7 @@
-import React from 'react';
-import styles from './Input.module.css';
+import type React from 'react';
+import './Input.module.css';
+import type { InputChange } from '~/hooks/types';
+import type { InputFocus } from '~/hooks/types';
 
 // Utility function
 const getDescriptionId = (inputName: string) => `${inputName}-description`;
@@ -21,10 +23,10 @@ type ControlProps = {
   name: string;
   type?: string;
   value?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   className?: string;
   placeholder?: string;
+  onChange: (event: InputChange) => void;
+  onBlur?: (event: InputFocus) => void;
   'aria-describedby'?: string;
   'aria-invalid'?: boolean;
   'aria-label'?: string;
@@ -43,9 +45,7 @@ type DescriptionProps = {
 };
 
 // Components
-const Field = ({ children }: FieldProps) => (
-  <div>{children}</div>
-);
+const Field = ({ children }: FieldProps) => <div>{children}</div>;
 
 const Label = ({ children, htmlFor }: LabelProps) => (
   <label htmlFor={htmlFor}>{children}</label>
@@ -54,7 +54,7 @@ const Label = ({ children, htmlFor }: LabelProps) => (
 const Control = ({
   id,
   name,
-  type = 'text',
+  type,
   value,
   onChange,
   onBlur,
@@ -79,32 +79,28 @@ const Control = ({
   />
 );
 
-const Error = ({ children }: ErrorProps) => {
-  if (!children) return null;
+const ErrorMessage = ({ children }: ErrorProps) => {
+  if (!children) {
+    return null;
+  }
 
-  return (
-    <div role="alert">
-      {children}
-    </div>
-  );
+  return <div role="alert">{children}</div>;
 };
 
 const Description = ({ error, inputName, children }: DescriptionProps) => {
-  if (error || !children) return null;
+  if (error || !children) {
+    return null;
+  }
 
-  return (
-    <div id={getDescriptionId(inputName)}>
-      {children}
-    </div>
-  );
+  return <div id={getDescriptionId(inputName)}>{children}</div>;
 };
 
-// Compose the Input namespace object
+// Input namespace
 export const Input = {
   Field,
   Label,
   Control,
-  Error,
+  ErrorMessage,
   Description,
   getDescriptionId,
 };

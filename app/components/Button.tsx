@@ -1,14 +1,8 @@
-import type { ButtonHTMLAttributes } from "react";
+import React from 'react';
+import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonProps } from '../types/types'; // Adjust the path as necessary
 
-type ButtonProps = {
-  children: React.ReactNode;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
-
-
-const Button = ({
-  type = "button",
-  children,
-}: ButtonProps) => {
+const Button = ({ type = 'button', children }: ButtonProps) => {
   return (
     <button
       type={type}
@@ -19,7 +13,7 @@ const Button = ({
   );
 };
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 
 export { Button };
 export type { ButtonProps };

@@ -1,8 +1,8 @@
-import { Input } from './Input';
-import { useInputValue } from '../hooks/useInputValue';
 import type { Validator } from '../hooks/types';
+import { useInput } from '../hooks/useInput';
+import { Input } from './Input';
 
-type TextInputProps = {
+type TextFieldProps = {
   name: string;
   label: string;
   validator: Validator;
@@ -11,15 +11,18 @@ type TextInputProps = {
   className?: string;
 };
 
-export const TextInput = ({
+export const TextField = ({
   name,
   label,
   validator,
   description,
   placeholder,
-  className
-}: TextInputProps) => {
-  const { value, error, clear, validate, isDirty } = useInputValue(validator, name);
+  className,
+}: TextFieldProps) => {
+  const { value, error, clear, validate, isDirty } = useInput(
+    validator,
+    name,
+  );
 
   return (
     <Input.Field className={className}>
@@ -33,11 +36,11 @@ export const TextInput = ({
         onChange={clear}
         onBlur={validate}
         placeholder={placeholder}
-        aria-describedby={description ? Input.getDescriptionId(name) : undefined}
+        aria-describedby={description && Input.getDescriptionId(name)}
         aria-invalid={isDirty && !!error}
       />
 
-      <Input.Error>{error}</Input.Error>
+      <Input.ErrorMessage>{error}</Input.ErrorMessage>
 
       <Input.Description error={error} inputName={name}>
         {description}
