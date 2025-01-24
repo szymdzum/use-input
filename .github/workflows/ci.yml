@@ -22,16 +22,13 @@ jobs:
     timeout-minutes: 15
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
           
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -43,6 +40,9 @@ jobs:
           else
             pnpm install
           fi
+          
+      - name: Generate React Router Types
+        run: pnpm remix-router types
         
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
@@ -54,7 +54,7 @@ jobs:
         
       - name: Type Check
         run: pnpm tsc --noEmit
-        
+
   test:
     name: Test
     needs: validate
@@ -64,13 +64,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
           
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -82,6 +80,9 @@ jobs:
           else
             pnpm install
           fi
+
+      - name: Generate React Router Types
+        run: pnpm remix-router types
         
       - name: Run tests
         run: pnpm test -- --coverage
@@ -102,13 +103,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
           
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -120,6 +119,9 @@ jobs:
           else
             pnpm install
           fi
+
+      - name: Generate React Router Types
+        run: pnpm remix-router types
         
       - name: Build
         run: pnpm build
