@@ -1,6 +1,7 @@
-import { renderHook, act } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
+import type { ChangeEvent } from 'react';
+import { describe, expect, it } from 'vitest';
 import { useInput } from './useInput';
-import { describe, it, expect } from 'vitest';
 
 describe('useInput', () => {
   it('should handle input changes', () => {
@@ -9,7 +10,7 @@ describe('useInput', () => {
     act(() => {
       result.current.onChange({
         target: { value: 'test' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      } as ChangeEvent<HTMLInputElement>);
     });
 
     expect(result.current.value).toBe('test');
