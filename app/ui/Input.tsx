@@ -1,6 +1,5 @@
 import type React from 'react';
 import './Input.module.css';
-import type { ChangeEvent } from 'react';
 import type { InputChange } from '~/hooks/types';
 import type { InputFocus } from '~/hooks/types';
 

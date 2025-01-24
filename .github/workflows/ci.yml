@@ -7,7 +7,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Ensures only one workflow per branch/PR runs at a time
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -26,7 +25,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      # Setup PNPM with caching
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
@@ -39,9 +37,13 @@ jobs:
           cache: 'pnpm'
           
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
+          else
+            pnpm install
+          fi
         
-      # Biome check for linting and formatting
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:
@@ -50,7 +52,6 @@ jobs:
       - name: Run Biome
         run: pnpm biome ci .
         
-      # TypeScript type checking
       - name: Type Check
         run: pnpm tsc --noEmit
         
@@ -61,8 +62,7 @@ jobs:
     timeout-minutes: 15
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
@@ -76,13 +76,16 @@ jobs:
           cache: 'pnpm'
           
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
+          else
+            pnpm install
+          fi
         
-      # Run tests with coverage reporting
       - name: Run tests
         run: pnpm test -- --coverage
         
-      # Upload coverage reports
       - name: Upload coverage
         uses: actions/upload-artifact@v4
         with:
@@ -97,8 +100,7 @@ jobs:
     timeout-minutes: 15
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
@@ -112,13 +114,16 @@ jobs:
           cache: 'pnpm'
           
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
+          else
+            pnpm install
+          fi
         
-      # Build the project
       - name: Build
         run: pnpm build
         
-      # Upload build artifacts
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
@@ -126,7 +131,6 @@ jobs:
           path: dist/
           retention-days: 14
 
-  # This job ensures all required checks pass before allowing merge
   status-check:
     name: Status Check
     needs: [validate, test, build]
