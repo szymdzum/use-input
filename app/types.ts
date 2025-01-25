@@ -1,6 +1,7 @@
 import type React from 'react';
 
 export type ReactChildren = React.ReactNode;
+export type SVGIcon = React.SVGProps<SVGSVGElement>;
 
 export type ButtonProps = {
   children: ReactChildren;

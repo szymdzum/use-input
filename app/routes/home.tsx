@@ -29,8 +29,14 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   );
 }
 
-// Validation utility function
-function validateInput(value, rules) {
+type ValidationRule<T> = (value: T) => string | null;
+// type ValidationFunction<T> = (value: T, rules: ValidationRule<T>[]) => string | null;
+
+
+function validateInput<T>(
+  value: T,
+  rules: ValidationRule<T>[]
+): string | null {
   for (const rule of rules) {
     const error = rule(value);
     if (error) {
@@ -41,21 +47,21 @@ function validateInput(value, rules) {
 }
 
 // Validation rules
-const required = (value) => {
+const required: ValidationRule<string> = (value) => {
   if (!value) {
     return 'This field is required.';
   }
   return null;
 };
 
-const isString = (value) => {
+const isString: ValidationRule<unknown> = (value) => {
   if (typeof value !== 'string') {
     return 'This field must be a string.';
   }
   return null;
 };
 
-const isEmail = (value) => {
+const isEmail: ValidationRule<string> = (value) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(value)) {
     return 'Please enter a valid email address.';
@@ -63,14 +69,14 @@ const isEmail = (value) => {
   return null;
 };
 
-const minLength = (min) => (value) => {
+const minLength = (min: number): ValidationRule<string> => (value) => {
   if (value.length < min) {
     return `This field must be at least ${min} characters long.`;
   }
   return null;
 };
 
-const maxLength = (max) => (value) => {
+const maxLength = (max: number): ValidationRule<string> => (value) => {
   if (value.length > max) {
     return `This field must be no more than ${max} characters long.`;
   }
