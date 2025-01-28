@@ -1,117 +1,52 @@
-import styles from './Input.module.css';
+import type { InputHTMLAttributes } from "react";
+import { useInput } from "~/hooks/useInput";
+import styles from "./Input.module.css";
 
-import type { InputChange, InputFocus, ReactChildren } from 'app/types';
-
-// Utility function
-const getDescriptionId = (inputName: string) => `${inputName}-description`;
-
-// Types
-type FieldProps = {
-  children: ReactChildren;
-  className?: string;
-};
-
-type LabelProps = {
-  children: ReactChildren;
-  className?: string;
-  htmlFor?: string;
-};
-
-type ControlProps = {
-  id?: string;
+type InputProps = {
   name: string;
+  label: string;
   type?: string;
-  value?: string;
-  className?: string;
   placeholder?: string;
-  onChange: (event: InputChange) => void;
-  onBlur?: (event: InputFocus) => void;
-  'aria-describedby'?: string;
-  'aria-invalid'?: boolean;
-  'aria-label'?: string;
-};
+  description?: string;
+  validator?: (value: string) => string | null;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'name' | 'type'>;
 
-type ErrorProps = {
-  children?: ReactChildren;
-  className?: string;
-};
 
-type DescriptionProps = {
-  error: string | null;
-  inputName: string;
-  children: ReactChildren;
-  className?: string;
-};
 
-// Components
-const Field = ({ children }: FieldProps) => <div className={styles.field}>{children}</div>;
-
-const Label = ({ children, htmlFor }: LabelProps) => (
-  <label htmlFor={htmlFor}>{children}</label>
-);
-
-const Control = ({
-  id,
+export const Input = ({
   name,
-  type,
-  value,
-  onChange,
-  onBlur,
+  label,
+  type = 'text',
   placeholder,
-  'aria-describedby': ariaDescribedby,
-  'aria-invalid': ariaInvalid,
-  'aria-label': ariaLabel,
+  description,
+  validator,
   ...props
-}: ControlProps) => (
-  <input
-    {...props}
-    id={id || name}
-    name={name}
-    type={type}
-    value={value}
-    onChange={onChange}
-    onBlur={onBlur}
-    placeholder={placeholder}
-    aria-describedby={ariaDescribedby}
-    aria-invalid={ariaInvalid}
-    aria-label={ariaLabel || name}
-  />
-);
+}: InputProps) => {
 
-const ErrorMessage = ({ children }: ErrorProps) => {
-  if (!children) {
-    return null;
-  }
+  const { value, error, clear, validate, isDirty } = useInput(validator);
 
-  return <div role="alert">{children}</div>;
+  return (
+    <div className={styles.field}>
+      <label htmlFor={name}>{label}</label>
+
+      <input
+        {...props}
+        id={name}
+        name={name}
+        type={type}
+        value={value}
+        onChange={clear}
+        onBlur={validate}
+        placeholder={placeholder}
+        aria-describedby={description && `${name}-description`}
+        aria-invalid={isDirty && !!error}
+      />
+
+      {error ? (
+        <div role="alert">{error}</div>
+      ) : description ? (
+        <div id={`${name}-description`}>{description}</div>
+      ) : null}
+    </div>
+  );
 };
-
-const Description = ({ error, inputName, children }: DescriptionProps) => {
-  if (error || !children) {
-    return null;
-  }
-
-  return <div id={getDescriptionId(inputName)}>{children}</div>;
-};
-
-// Input namespace
-export const Input = {
-  Field,
-  Label,
-  Control,
-  ErrorMessage,
-  Description,
-  getDescriptionId,
-};
-
-// Type exports
-export type {
-  FieldProps,
-  LabelProps,
-  ControlProps,
-  ErrorProps,
-  DescriptionProps,
-};
-
-// Default export
-export default Input;

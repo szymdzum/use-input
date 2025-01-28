@@ -1,30 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useServerValidation } from './useServerValidation';
 
-import type { InputChange, InputFocus, Validator } from 'app/types';
-/**
- * Hooks into inputs value and manages its validation state
- * @param {Validator} [validator] - Function to validate the input value
- * @param {string} [inputName] - Optional input "name" attribute for server-side mapping
- * @returns {ValidationResult} value, error, validate, clear, isValid, isDirty
- * @example
- * const { value, error, validate, clear } = useInputValue(validator);
- */
+import type { InputChange, InputFocus } from 'app/types';
+import type { ValidationRule } from '~/ui/validation';
+
+const noValidation: ValidationRule = () => null;
+  // Helper function to get trimmed value from event
+const getInputValue = (event: InputChange | InputFocus): string => {
+  return event?.target?.value?.trim() ?? '';
+};
+
+
 export const useInput = (
-  validator: Validator,
+  rule: ValidationRule = noValidation,
   inputName?: string,
 ): ValidationResult => {
   const [value, setValue] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isDirty, setIsDirty] = useState(false);
-
-  // Helper function to get trimmed value from event
-  const getInputValue = useCallback(
-    (event: InputChange | InputFocus): string => {
-      return event?.target?.value?.trim() ?? '';
-    },
-    [],
-  );
 
   // Server-side validation handling
   const errorMessage = useServerValidation(inputName || '');
@@ -35,47 +28,36 @@ export const useInput = (
     }
   }, [inputName, errorMessage]);
 
-  const validate = useCallback(
-    (event: InputFocus) => {
-      const inputValue = getInputValue(event);
-      const errorMessage = validator(inputValue);
-      if (errorMessage) {
+  const validate = (event: InputFocus) => {
+    const inputValue = getInputValue(event);
+    const errorMessage = rule(inputValue);
+    if (errorMessage) {
         setError(errorMessage);
       } else {
-        setError(null);
-      }
-    },
-    [validator, getInputValue],
-  );
+      setError(null);
+    }
+  };
 
   // Clears error on input onChange
-  const clear = useCallback(
-    (event: InputChange) => {
-      const newValue = getInputValue(event);
-      setValue(newValue);
-      setIsDirty(true);
-      if (error) {
-        setError(null);
-      }
-    },
-    [error, getInputValue],
-  );
+  const clear = (event: InputChange) => {
+    const newValue = getInputValue(event);
+    setValue(newValue);
+    setIsDirty(true);
+    if (error) {
+      setError(null);
+    }
+  };
 
-  const isValid = useMemo(() => {
-    return error === null && value.trim().length > 0;
-  }, [error, value]);
+  const isValid = error === null && value.trim().length > 0;
 
-  const validationResult = useMemo(
-    () => ({
+  const validationResult: ValidationResult = {
       value,
       error,
-      clear,
-      validate,
-      isValid,
-      isDirty,
-    }),
-    [value, error, clear, validate, isValid, isDirty],
-  );
+    clear,
+    validate,
+    isValid,
+    isDirty,
+  };
 
   return validationResult;
 };
