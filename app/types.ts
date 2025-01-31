@@ -1,12 +1,10 @@
 import type React from 'react';
 
-export type ReactChildren = React.ReactNode;
+export type ReactNode = React.ReactNode;
+export type ReactElement = React.ReactElement;
 export type SVGIcon = React.SVGProps<SVGSVGElement>;
-
-export type ButtonProps = {
-  children: ReactChildren;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
-
+export type ReactButton = React.ButtonHTMLAttributes<HTMLButtonElement>;
+export type InvalidEvent = React.InvalidEvent<HTMLInputElement>;
 export type InputFocus = React.FocusEvent<HTMLInputElement>;
 export type InputChange = React.ChangeEvent<HTMLInputElement>;
 export type TextAreaFocus = React.FocusEvent<HTMLTextAreaElement>;

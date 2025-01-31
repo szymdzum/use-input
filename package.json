@@ -21,7 +21,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-live": "^4.1.8",
-    "react-router": "*"
+    "react-router": "*",
+    "react-scan": "^0.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

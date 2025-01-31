@@ -1,10 +1,20 @@
-import type { ButtonProps } from 'app/types';
+import type { ReactButton, ReactNode } from '~/types';
+import styles from './Button.module.css';
 
-const Button = ({ type = 'button', children }: ButtonProps) => {
+type ButtonProps = {
+  children: ReactNode;
+} & ReactButton;
+
+const Button = ({
+  type = 'button',
+  children,
+  ...props
+}: ButtonProps) => {
   return (
     <button
       type={type}
-      className="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium shadow-sm transition-colors px-4 py-2 bg-slate-900 text-white hover:bg-slate-950"
+      className={styles.button}
+      {...props}
     >
       {children}
     </button>

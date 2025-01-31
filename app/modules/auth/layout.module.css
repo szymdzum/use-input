@@ -1,0 +1,25 @@
+.authLayout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+}
+
+.authCard {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 20rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+
+   > h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  > form {
+    margin-top: 1.5rem;
+  }
+}

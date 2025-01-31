@@ -1,7 +1,9 @@
-import { EmailField } from '~/ui/EmailField';
-import { TextField } from '~/ui/TextField';
-import { UsernameField } from '~/ui/UsernameField';
+import { NavLink } from "react-router"
+import { EmailField } from '~/modules/EmailField';
+import { TextField } from '~/modules/TextField';
+import { UsernameField } from '~/modules/UsernameField';
 import type { Route } from './+types/home';
+
 
 export function meta(_: Route.MetaArgs) {
   return [
@@ -16,10 +18,10 @@ export function loader({ context }: Route.LoaderArgs) {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
 
-
   return (
     <div>
       <p>{loaderData.message}</p>
+      <NavLink to="/login">Login</NavLink>
       <TextField />
       <UsernameField />
       <EmailField />

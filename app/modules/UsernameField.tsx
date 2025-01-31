@@ -1,7 +1,6 @@
 import { Input } from '../components/Input/Input';
 import { combineRules, maxLength, minLength, required } from './validation';
 
-
 export const UsernameField = () => {
   const usernameRules = combineRules(
     required,

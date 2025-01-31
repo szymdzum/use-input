@@ -3,11 +3,10 @@ import styles from "./Input.module.css";
 import { useInput } from "~/hooks/useInput";
 import { Label } from "./Label";
 import { Message } from "./Message";
-import { ariaAttributes, useInputIds } from "./helpers";
+import { ariaOn, useInputIds } from "./helpers";
 
-import type { ReactElement } from "react";
+import type { ReactElement } from "~/types";
 import type { InputProps } from "./types";
-
 
 export const Input = ({
   name,
@@ -36,8 +35,8 @@ export const Input = ({
 
   const isInvalid = isDirty && !isValid;
 
-  const ariaErrorMessage = ariaAttributes(error).errorMessage(errorId);
-  const ariaDescribedBy = ariaAttributes(error).descriptionBy(descriptionId);
+  const ariaErrorMessage = ariaOn(error).errorMessage(errorId);
+  const ariaDescribedBy = ariaOn(error).descriptionBy(descriptionId);
 
   return (
     <div className={styles.field}>

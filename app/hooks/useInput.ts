@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import type { ValidationRule } from '~/modules/validation';
 import type { InputChange, InputFocus } from '~/types';
-import type { ValidationRule } from '~/ui/validation';
 import { useServerValidation } from './useServerValidation';
 
 type ValidationResult = {

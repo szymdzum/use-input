@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 const createInputId = () => ({
   id: (name: string) => `input-${name}`,
   errorId: (name: string) => `${name}-error`,
@@ -15,7 +13,7 @@ export const useInputIds = (name: string) => {
   };
 };
 
-export const ariaAttributes = (error: string | null) => ({
+export const ariaOn = (error: string | null) => ({
   errorMessage: (errorId: string) => error ? errorId : undefined,
   descriptionBy: (descriptionId: string) => !error ? descriptionId : undefined,
 });

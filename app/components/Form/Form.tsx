@@ -1,7 +1,8 @@
+import { Form as BaseForm, type FormProps as BaseFormProps } from 'react-router';
+import { ErrorBoundary } from '../ErrorBoundary';
+
 import type React from 'react';
 import type { ErrorInfo } from 'react';
-import { Form as BaseForm } from 'react-router';
-import { ErrorBoundary } from '../ErrorBoundary';
 
 type FormProps = {
   method?: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
@@ -15,7 +16,11 @@ type FormProps = {
   onError?: React.FormEventHandler<HTMLFormElement>;
 };
 
-const Form = ({ method = 'POST', noValidate = true, ...props }: FormProps) => (
+const Form = ({
+  method = 'POST',
+  noValidate = false,
+  ...props
+}: FormProps) => (
   <ErrorBoundary
     fallback={
       <div role="alert" aria-live="polite" className="form-error">
