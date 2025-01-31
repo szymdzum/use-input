@@ -1,5 +1,5 @@
-import { Input } from '../Input/Input';
-import { isEmail } from '../validation';
+import { Input } from '~/components/Input/Input';
+import { isEmail } from './validation';
 
 export const EmailField = () => {
 
@@ -10,7 +10,10 @@ export const EmailField = () => {
       type="email"
       placeholder="Enter your email"
       description="Please enter a valid email address"
-      validator={isEmail}
+      validation={isEmail}
+      required
     />
   );
 };
+
+EmailField.displayName = 'EmailField';

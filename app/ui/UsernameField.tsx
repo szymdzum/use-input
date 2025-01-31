@@ -1,5 +1,5 @@
-import { Input } from '../Input/Input';
-import { combineRules, maxLength, minLength, required } from '../validation';
+import { Input } from '../components/Input/Input';
+import { combineRules, maxLength, minLength, required } from './validation';
 
 
 export const UsernameField = () => {
@@ -15,7 +15,7 @@ export const UsernameField = () => {
       label="Username"
       type="text"
       placeholder="Enter your username"
-      validator={usernameRules}
+      validation={usernameRules}
       description="Choose a unique username (3-20 characters)"
     />
   );
