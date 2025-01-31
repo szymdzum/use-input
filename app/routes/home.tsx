@@ -1,4 +1,6 @@
-import { TextField } from '~/ui/TextInput';
+import { EmailField } from '~/ui/EmailField';
+import { TextField } from '~/ui/TextField';
+import { UsernameField } from '~/ui/UsernameField';
 import type { Route } from './+types/home';
 
 export function meta(_: Route.MetaArgs) {
@@ -13,18 +15,14 @@ export function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
+
+
   return (
     <div>
       <p>{loaderData.message}</p>
-      <TextField
-        name="username"
-        label="Username"
-        validator={(value: string) =>
-          value.length < 3 ? 'Username too short' : null
-        }
-        description="Must be at least 3 characters long"
-        placeholder="Enter username"
-      />
+      <TextField />
+      <UsernameField />
+      <EmailField />
     </div>
   );
 }
