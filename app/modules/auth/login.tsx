@@ -5,6 +5,7 @@ import { PasswordField, passwordRules } from '~/components/Password/PasswordFiel
 import { EmailField } from '~/modules/EmailField';
 import { isEmail, usernameRules } from '~/modules/validation';
 
+import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 import type { Route } from './+types/login';
 import styles from './layout.module.css';
@@ -23,22 +24,12 @@ export default function Login({ actionData }: Route.ComponentProps) {
   return (
    <section className={styles.authCard}>
    <h2>Sign In</h2>
-           <div className={styles.divider} />
+  <div className={styles.divider} />
       <Form ref={form.ref}>
         <EmailField />
         <PasswordField  />
-        <div className={styles.dividerWithText}>
-          <span className={styles.dividerText}>And click the button </span>
-        </div>
-        <PrimaryButton
-          type="submit"
-          onClick={() => {
-            const elementNames = form.getElementNames();
-            const elements = form.getElements();
-            console.log('elements:', elements);
-            console.log('elementNames:', elementNames);
-          }}
-        >
+        <TextDivider> and click the button</TextDivider>
+        <PrimaryButton type="submit">
           Sign In
         </PrimaryButton>
         <RegistrationURL />
@@ -58,3 +49,13 @@ const RegistrationURL = () => {
     </div>
   );
 };
+
+const TextDivider = (children: ReactNode  ) => {
+  return (
+    <div className={styles.dividerWithText}>
+      <span className={styles.dividerText}>
+        {children}
+      </span>
+    </div>
+  )
+}
