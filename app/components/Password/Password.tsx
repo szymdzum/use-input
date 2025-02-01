@@ -5,9 +5,9 @@ import { useInput } from "~/hooks/useInput";
 import styles from "../Input/Input.module.css";
 import { Message } from "../Input/Message";
 import { Show } from "../Input/Show";
-import { ForgotPassword } from "./ForgotPassword";
+import { LinkToRestPassword } from "./LinkToRestPassword";
 import passwordStyles from "./Password.module.css";
-import { PasswordToggle } from "./PasswordToggle";
+import { TypeToggle } from "./TypeToggle";
 
 type PasswordFieldProps = {
   name?: string;
@@ -56,7 +56,7 @@ export const PasswordField = ({
         </Label>
 
         <Show if={showForgotPassword}>
-          <ForgotPassword onForgotPassword={() => {}} />
+          <LinkToRestPassword  />
         </Show>
       </div>
 
@@ -71,7 +71,7 @@ export const PasswordField = ({
           disabled={disabled}
           required={required}
         />
-        <PasswordToggle onVisibilityChange={setShowPassword} />
+        <TypeToggle onVisibilityChange={setShowPassword} />
       </div>
       <Message
         name={name}

@@ -8,6 +8,7 @@ export type InputFocus = React.FocusEvent<HTMLInputElement>;
 export type InputChange = React.ChangeEvent<HTMLInputElement>;
 export type TextAreaFocus = React.FocusEvent<HTMLTextAreaElement>;
 export type SelectFocus = React.FocusEvent<HTMLSelectElement>;
+export type FormEvent =  React.FormEventHandler<HTMLFormElement>;
 
 export type ReactButton = React.ButtonHTMLAttributes<HTMLButtonElement>;
 export type SVGIcon = React.SVGProps<SVGSVGElement>;

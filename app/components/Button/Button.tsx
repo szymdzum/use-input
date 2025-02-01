@@ -26,7 +26,7 @@ Button.displayName = 'Button';
 export { Button };
 export type { ButtonProps };
 
-export const PrimaryButton = ({ children, ...props }: ButtonProps) => {
+export const Submit = ({ children, ...props }: ButtonProps) => {
   return (
     <Button type="submit" className={styles.primaryButton} {...props}>
       {children}

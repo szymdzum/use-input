@@ -1,4 +1,3 @@
-
 import {
   Links,
   Meta,
@@ -10,7 +9,7 @@ import {
 
 import type { ReactNode } from 'react';
 import type { Route } from './+types/root';
-import NavBar from './components/NavBar';
+import NavBar from './components/NavBar/NavBar';
 import { links } from './links'; // Import the links array
 export { links }; // Re-export the links array
 

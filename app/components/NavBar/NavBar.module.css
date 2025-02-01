@@ -6,10 +6,10 @@ footer {
   justify-content: space-evenly;
   padding: 1rem;
   background-color: rgba(31, 41, 55, 0.8);
-}
 
-h1 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  display: inline;
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: inline;
+  }
 }

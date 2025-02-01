@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Show } from "../Input/Show";
 import styles from "./Password.module.css";
 
-type PasswordToggleProps = {
+type TypeToggleProps = {
   onVisibilityChange: (isVisible: boolean) => void;
 };
 
-export const PasswordToggle = ({ onVisibilityChange }: PasswordToggleProps) => {
+export const TypeToggle = ({ onVisibilityChange }: TypeToggleProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleVisibility = () => {
@@ -34,4 +34,4 @@ export const PasswordToggle = ({ onVisibilityChange }: PasswordToggleProps) => {
   );
 };
 
-PasswordToggle.displayName = "PasswordToggle";
+TypeToggle.displayName = "TypeToggle";
