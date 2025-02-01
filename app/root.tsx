@@ -25,8 +25,11 @@ export function Layout({ children }: { children: ReactNode }) {
         <Links />
       </head>
       <body>
-        <NavBar />
-        <main>{children}</main>
+        <main>
+          {children}
+          <NavBar />
+        </main>
+
         <ScrollRestoration />
         <Scripts />
       </body>

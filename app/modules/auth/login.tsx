@@ -5,6 +5,7 @@ import { PasswordField, passwordRules } from '~/components/Password/PasswordFiel
 import { EmailField } from '~/modules/EmailField';
 import { isEmail, usernameRules } from '~/modules/validation';
 
+import { Link } from 'react-router';
 import type { Route } from './+types/login';
 import styles from './layout.module.css';
 export async function action({
@@ -20,11 +21,15 @@ export default function Login({ actionData }: Route.ComponentProps) {
 
   const form = useForm();
   return (
-   <>
-      <Form  ref={form.ref}>
+   <section className={styles.authCard}>
+   <h2>Sign In</h2>
+           <div className={styles.divider} />
+      <Form ref={form.ref}>
         <EmailField />
         <PasswordField  />
-        <div className={styles.divider} />
+        <div className={styles.dividerWithText}>
+          <span className={styles.dividerText}>And click the button </span>
+        </div>
         <PrimaryButton
           type="submit"
           onClick={() => {
@@ -36,7 +41,20 @@ export default function Login({ actionData }: Route.ComponentProps) {
         >
           Sign In
         </PrimaryButton>
+        <RegistrationURL />
       </Form>
-    </>
+    </section>
   );
 }
+
+
+const RegistrationURL = () => {
+  return (
+    <div className={styles.registrationURL}>
+      <p>Don't have an account?</p>
+      <Link to="/register">
+        Sign In
+      </Link>
+    </div>
+  );
+};

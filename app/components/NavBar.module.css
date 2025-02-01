@@ -1,8 +1,11 @@
 header {
+  position: sticky;
+  bottom: 0;  /* Adjust spacing from bottom */
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0.5rem 1rem;
+  justify-content: space-evenly;
+  padding: 1rem 1rem;
+  background: rgba(39, 39, 42, 0.8);
 }
 
 h1 {
@@ -15,17 +18,4 @@ h1 {
 nav {
   display: flex;
   gap: 1rem;
-}
-a.active {
-  color: red;
-}
-
-a.pending {
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
 }
