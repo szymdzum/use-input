@@ -50,7 +50,7 @@ const RegistrationURL = () => {
   );
 };
 
-const TextDivider = (children: ReactNode  ) => {
+const TextDivider = ({ children }: { children: ReactNode }) => {
   return (
     <div className={styles.dividerWithText}>
       <span className={styles.dividerText}>
