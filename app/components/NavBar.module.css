@@ -1,20 +1,10 @@
 footer {
   position: sticky;
-  bottom: 0;  /* Adjust spacing from bottom */
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 1rem 1rem;
-  background: rgba(39, 39, 42, 0.8);
+  bottom: 0;
+  @apply flex items-center justify-evenly p-4 bg-opacity-80 bg-gray-800;
 }
 
 h1 {
   font-size: 1.5rem;
-  font-weight: bold;
-  display: inline;
-}
-
-nav {
-  display: flex;
-  gap: 1rem;
+  @apply font-bold inline;
 }

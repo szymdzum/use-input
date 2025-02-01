@@ -11,6 +11,30 @@ body {
   }
 }
 
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold leading-tight mb-4;
+}
+
+nav {
+  @apply flex gap-4;
+}
+
+input {
+  @apply w-full border rounded p-2;
+}
+
+input:focus {
+  @apply outline-none border-blue-500 shadow-outline;
+}
+
+input[aria-invalid='true'] {
+  @apply border-red-500;
+}
+
+input[aria-invalid='true']:focus {
+  @apply shadow-outline-red;
+}
+
 
 
 h2,

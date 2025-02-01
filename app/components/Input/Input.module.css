@@ -22,46 +22,22 @@
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+}
 
-  label {
-    font-weight: 500;
-    font-size: 0.875rem;
-   line-height: 1.25rem;
-  }
+label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
 
-  input {
-    width: 100%;
-    font-size: var(--input-font-size);
-    padding: var(--input-padding);
-    border: 1px solid var(--input-border-color);
-    border-radius: var(--input-border-radius);
-  }
+.description {
+  display: block;
+  font-size: var(--input-message-font-size);
+  color: var(--input-description-color);
+}
 
-  input:focus {
-    outline: none;
-    border-color: var(--input-border-color-focus);
-    box-shadow: 0 0 0 1px var(--input-border-color-focus);
-  }
-
-  input[aria-invalid='true'] {
-    border-color: var(--input-error-color);
-  }
-
-  input[aria-invalid='true']:focus {
-    box-shadow: 0 0 0 1px var(--input-error-color);
-  }
-
-  .description {
-    display: block;
-    font-size: var(--input-message-font-size);
-
-    color: var(--input-description-color);
-  }
-
-  .error {
-    display: block;
-    font-size: var(--input-message-font-size);
-
-    color: var(--input-error-color);
-  }
+.error {
+  display: block;
+  font-size: var(--input-message-font-size);
+  color: var(--input-error-color);
 }
