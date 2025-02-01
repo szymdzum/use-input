@@ -6,10 +6,10 @@ type TitleProps = {
   className?: string;
 };
 
-export const Title: React.FC<TitleProps> = ({ children, className = '' }) => {
+export const Title: React.FC<TitleProps> = ({ children }) => {
   return (
-    <h2 className={`${styles.title} ${className}`}>
+    <h3 className={styles.h3}>
       {children}
-    </h2>
+    </h3>
   );
 };

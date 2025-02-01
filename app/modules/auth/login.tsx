@@ -24,9 +24,9 @@ export default function Login({ actionData }: Route.ComponentProps) {
   console.log(actionData);
 
   return (
-   <section className={styles.authCard}>
+   <section className={styles.card}>
      <Title>Sign In</Title>
-     <div className={styles.divider} />
+     <div className=  {styles.divider} />
      <Form>
         <EmailField />
         <PasswordField />
@@ -55,7 +55,7 @@ const LinkToRegistration = () => {
 
 const TextDivider = ({ children }: { children: ReactNode }) => {
   return (
-    <div className={styles.dividerWrapper}>
+    <div className={styles.dividerWithText}>
       <span className={styles.dividerText}>
         {children}
       </span>
