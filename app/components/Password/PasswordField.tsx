@@ -1,23 +1,34 @@
 import { useState } from "react";
 import { Label } from "~/components/Input/Label";
 
-import type { InputProps } from "~/components/Input/types";
-
+import { useInput } from "~/hooks/useInput";
 import styles from "../Input/Input.module.css";
+import { Message } from "../Input/Message";
 import { Show } from "../Input/Show";
 import { ForgotPassword } from "./ForgotPassword";
 import passwordStyles from "./Password.module.css";
 import { PasswordToggle } from "./PasswordToggle";
 
-type PasswordFieldProps = Omit<InputProps, "type" | "label"> & {
+type PasswordFieldProps = {
+  name?: string;
+  label?: string;
+  required?: boolean;
+  disabled?: boolean;
   showForgotPassword?: boolean;
   onForgotPassword?: () => void;
 };
 
+export const passwordRules = (value: string) => {
+
+  if (value.length < 8) {
+    return "Password must be at least 8 characters long";
+  }
+  return null;
+};
+
 export const PasswordField = ({
   name = "password",
-  description,
-  validation,
+  label = "Password",
   required = true,
   disabled,
   showForgotPassword,
@@ -25,6 +36,17 @@ export const PasswordField = ({
   ...props
 }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
+
+ const {
+  value,
+  error,
+  onBlurValidate,
+  onChangeClear,
+
+  } = useInput(
+    passwordRules,
+    name
+  );
 
   return (
     <div className={styles.field}>
@@ -41,12 +63,20 @@ export const PasswordField = ({
       <div className={passwordStyles.inputWrapper}>
         <input
           {...props}
+          value={value}
+          onChange={onChangeClear}
+          onBlur={onBlurValidate}
           name={name}
           type={showPassword ? "text" : "password"}
           disabled={disabled}
+          required={required}
         />
         <PasswordToggle onVisibilityChange={setShowPassword} />
       </div>
+      <Message
+        name={name}
+        error={error}
+      />
     </div>
   );
 };

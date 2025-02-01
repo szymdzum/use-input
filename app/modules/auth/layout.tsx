@@ -1,15 +1,18 @@
+import { Stars } from 'lucide-react';
 import { Outlet } from 'react-router';
-import styles from './layout.module.css';
-
 import type { ReactElement } from '~/types/react';
+import styles from './layout.module.css';
 
 export default function AuthLayout(): ReactElement {
 
   return (
-    <div className={styles.authLayout}>
-      <section className={styles.authCard}>
-        <Outlet />
-      </section>
-    </div>
+        <div className={styles.twoColumnGrid}>
+            <div className={styles.formWrapper}>
+              <Outlet />
+            </div>
+          <div className={styles.starsSection}>
+            <Stars />
+          </div>
+        </div>
   );
 }

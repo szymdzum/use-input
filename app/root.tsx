@@ -1,35 +1,20 @@
-import type React from 'react';
+
 import {
   Links,
   Meta,
-  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
 } from 'react-router';
 
+import type { ReactNode } from 'react';
 import type { Route } from './+types/root';
+import NavBar from './components/NavBar';
 import { links } from './links'; // Import the links array
 export { links }; // Re-export the links array
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-function NavBar() {
-  return (
-    <nav>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/login">Login</NavLink>
-      <NavLink to="/register">Register</NavLink>
-      <NavLink to="/test">Test</NavLink>
-    </nav>
-  );
-}
-
-
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>

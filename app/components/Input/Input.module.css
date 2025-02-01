@@ -1,7 +1,7 @@
 :root {
   /* Typography */
   --input-font-size: 0.875rem;
-  --input-message-font-size: 0.875rem;
+  --input-message-font-size: 0.75rem;
 
   /* Spacing */
   --input-label-margin: 0.5rem;
@@ -21,9 +21,12 @@
 .field {
   display: flex;
   flex-direction: column;
+  gap: 0.3rem;
 
   label {
     font-weight: 500;
+    font-size: 0.875rem;
+   line-height: 1.25rem;
   }
 
   input {
@@ -51,14 +54,14 @@
   .description {
     display: block;
     font-size: var(--input-message-font-size);
-    margin-top: var(--input-message-margin-top);
+
     color: var(--input-description-color);
   }
 
   .error {
     display: block;
     font-size: var(--input-message-font-size);
-    margin-top: var(--input-message-margin-top);
+
     color: var(--input-error-color);
   }
 }

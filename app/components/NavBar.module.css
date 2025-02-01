@@ -1,0 +1,31 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: inline;
+
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+}
+a.active {
+  color: red;
+}
+
+a.pending {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}

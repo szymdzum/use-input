@@ -1,4 +1,4 @@
-import type { ReactButton, ReactNode } from '~/types';
+import type { ReactButton, ReactNode } from '~/types/react';
 import styles from './Button.module.css';
 
 type ButtonProps = {
@@ -25,3 +25,11 @@ Button.displayName = 'Button';
 
 export { Button };
 export type { ButtonProps };
+
+export const PrimaryButton = ({ children, ...props }: ButtonProps) => {
+  return (
+    <Button type="submit" className={styles.primaryButton} {...props}>
+      {children}
+    </Button>
+  );
+};
