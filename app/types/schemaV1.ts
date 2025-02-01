@@ -1,18 +1,5 @@
-import type React from 'react';
-
-export type ReactNode = React.ReactNode;
-export type ReactElement = React.ReactElement;
-export type SVGIcon = React.SVGProps<SVGSVGElement>;
-export type ReactButton = React.ButtonHTMLAttributes<HTMLButtonElement>;
-export type InvalidEvent = React.InvalidEvent<HTMLInputElement>;
-export type InputFocus = React.FocusEvent<HTMLInputElement>;
-export type InputChange = React.ChangeEvent<HTMLInputElement>;
-export type TextAreaFocus = React.FocusEvent<HTMLTextAreaElement>;
-export type SelectFocus = React.FocusEvent<HTMLSelectElement>;
-
 /** The Standard Schema interface. */
 /* https://github.com/standard-schema/standard-schema */
-
 export interface StandardSchemaV1<Input = unknown, Output = Input> {
   /** The Standard Schema properties. */
   readonly '~standard': StandardSchemaV1.Props<Input, Output>;
@@ -81,20 +68,7 @@ export declare namespace StandardSchemaV1 {
   export type InferOutput<Schema extends StandardSchemaV1> = NonNullable<
     Schema['~standard']['types']
   >['output'];
+
+   // biome-ignore lint/complexity/noUselessEmptyExport: needed for namespace visibility control.
+   export {};
 }
-const createSchema = <T>(validate: (value: unknown) => StandardSchemaV1.Result<T>): StandardSchemaV1<T> => ({
-  '~standard': {
-    version: 1,
-    vendor: 'my-lib',
-    validate
-  }
-});
-
-export const stringSchema = createSchema((value: unknown) => {
-  if (typeof value !== 'string') {
-    return { issues: [{ message: 'This field must be a string.' }] };
-  }
-  return { value };
-});
-
- //  const result = stringSchema['~standard'].validate(999);

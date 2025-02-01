@@ -5,7 +5,7 @@ import { Label } from "./Label";
 import { Message } from "./Message";
 import { ariaOn, useInputIds } from "./helpers";
 
-import type { ReactElement } from "~/types";
+import type { ReactElement } from "~/types/react";
 import type { InputProps } from "./types";
 
 export const Input = ({

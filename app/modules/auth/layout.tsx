@@ -1,7 +1,9 @@
 import { Outlet } from 'react-router';
 import styles from './layout.module.css';
 
-export default function AuthLayout() {
+import type { ReactElement } from '~/types/react';
+
+export default function AuthLayout(): ReactElement {
 
   return (
     <div className={styles.authLayout}>

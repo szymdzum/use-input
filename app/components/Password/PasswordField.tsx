@@ -4,7 +4,7 @@ import { Label } from "~/components/Input/Label";
 import type { InputProps } from "~/components/Input/types";
 
 import styles from "../Input/Input.module.css";
-import { Show } from "../Show";
+import { Show } from "../Input/Show";
 import { ForgotPassword } from "./ForgotPassword";
 import passwordStyles from "./Password.module.css";
 import { PasswordToggle } from "./PasswordToggle";

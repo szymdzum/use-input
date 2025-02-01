@@ -1,6 +1,6 @@
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { Show } from "../Show";
+import { Show } from "../Input/Show";
 import styles from "./Password.module.css";
 
 type PasswordToggleProps = {
