@@ -1,7 +1,7 @@
 html,
 body {
-  background-color: white;
-  color: #bdb7af;
+  background-color: #181a1b;
+  color: #e5e7eb;
 }
 
 @media (prefers-color-scheme: dark) {
