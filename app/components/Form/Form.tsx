@@ -21,8 +21,9 @@ export function useForm() {
       }
      return Array.from(elements)
       .map((element) => (element as HTMLInputElement).name)
-          .filter(Boolean);
+      .filter(Boolean);
     },
+
   };
 }
 

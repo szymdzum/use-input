@@ -18,6 +18,7 @@
     "@vercel/node": "^3.2.25",
     "express": "^4.21.1",
     "isbot": "^5.1.17",
+    "lucide-react": "^0.474.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-live": "^4.1.8",

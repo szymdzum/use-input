@@ -1,5 +1,6 @@
 import { NavLink } from "react-router"
 import { EmailField } from '~/modules/EmailField';
+import { PasswordField } from "~/modules/PasswordField";
 import { TextField } from '~/modules/TextField';
 import { UsernameField } from '~/modules/UsernameField';
 import type { Route } from './+types/home';
@@ -25,6 +26,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <TextField />
       <UsernameField />
       <EmailField />
+      <PasswordField name="password" showForgotPassword />
     </div>
   );
 }
