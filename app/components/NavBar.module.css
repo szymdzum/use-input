@@ -1,4 +1,4 @@
-header {
+footer {
   position: sticky;
   bottom: 0;  /* Adjust spacing from bottom */
   display: flex;
@@ -12,7 +12,6 @@ h1 {
   font-size: 1.5rem;
   font-weight: bold;
   display: inline;
-
 }
 
 nav {
