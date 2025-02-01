@@ -26,7 +26,7 @@ export const Input = ({
     isValid,
     onBlurValidate,
     onChangeClear,
-  } = useInput(validation);
+  } = useInput(validation, name);
 
   const ids = useInputIds(name);
   const inputId = ids.inputId;
@@ -43,6 +43,7 @@ export const Input = ({
       <Label htmlFor={inputId} required={required}>
         {label}
       </Label>
+
       <input
         {...props}
         name={name}

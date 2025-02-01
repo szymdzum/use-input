@@ -1,8 +1,30 @@
+import { useRef } from 'react';
 import { Form as BaseForm, type FormProps as BaseFormProps } from 'react-router';
 import { ErrorBoundary } from '../ErrorBoundary';
 
 import type React from 'react';
 import type { ErrorInfo } from 'react';
+
+export function useForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  return {
+    ref: formRef as React.RefObject<HTMLFormElement>,
+    getElement: (name: string) =>
+      formRef.current?.elements.namedItem(name) ?? null,
+    getElements: () => formRef.current?.elements,
+    getElementNames: () => {
+      const elements = formRef.current?.elements;
+      if (!elements) {
+        console.error('No elements found');
+        return [];
+      }
+     return Array.from(elements)
+      .map((element) => (element as HTMLInputElement).name)
+          .filter(Boolean);
+    },
+  };
+}
 
 type FormProps = {
   method?: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
@@ -14,11 +36,13 @@ type FormProps = {
   onComponentError?: (error: Error, info: ErrorInfo) => void;
   /** Form submission error handler */
   onError?: React.FormEventHandler<HTMLFormElement>;
+  ref?: React.RefObject<HTMLFormElement>;
 };
 
 const Form = ({
   method = 'POST',
   noValidate = false,
+  ref,
   ...props
 }: FormProps) => (
   <ErrorBoundary
@@ -31,7 +55,12 @@ const Form = ({
       console.error('Form Error:', error, info)
     }
   >
-    <BaseForm method={method} noValidate={noValidate} {...props} />
+    <BaseForm
+      ref={ref}
+      method={method}
+      noValidate={noValidate}
+      {...props}
+    />
   </ErrorBoundary>
 );
 

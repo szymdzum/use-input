@@ -1,6 +1,19 @@
 // Type definitions
 export type ValidationRule = (value: string) => string | null;
 
+export type Validation = ValidationRule | ValidationRule[];
+
+export const combineRules = (...rules: ValidationRule[]): ValidationRule =>
+  (value) => {
+    for (const rule of rules) {
+      const error = rule(value);
+      if (error) {
+        return error;
+      }
+    }
+    return null;
+  };
+
 // Validation rules
 export const required: ValidationRule = (value) => {
   if (!value) {
@@ -38,15 +51,8 @@ export const maxLength = (max: number): ValidationRule => (value) => {
   return null;
 };
 
-export const combineRules = (...rules: ValidationRule[]): ValidationRule =>
-  (value) => {
-    for (const rule of rules) {
-      const error = rule(value);
-      if (error) {
-        return error;
-      }
-    }
-    return null;
-  };
-
-export type Validation = ValidationRule | ValidationRule[];
+export const usernameRules = combineRules(
+  required,
+  minLength(3),
+  maxLength(20)
+);
