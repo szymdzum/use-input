@@ -1,6 +1,6 @@
 import { NavLink } from "react-router"
+import { PasswordField } from "~/components/Password/PasswordField";
 import { EmailField } from '~/modules/EmailField';
-import { PasswordField } from "~/modules/PasswordField";
 import { TextField } from '~/modules/TextField';
 import { UsernameField } from '~/modules/UsernameField';
 import type { Route } from './+types/home';
