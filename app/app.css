@@ -1,58 +1,71 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html,
 body {
-  @apply bg-white dark:bg-[#181a1b] text-[#bdb7af];
+  background-color: white;
+  color: #bdb7af;
+}
 
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    background-color: #181a1b;
     color-scheme: dark;
   }
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-bold leading-tight mb-4;
+  font-weight: bold;
+  line-height: 1.25;
+  margin-bottom: 1rem;
 }
 
 nav {
-  @apply flex gap-4;
+  display: flex;
+  gap: 1rem;
 }
 
 input {
-  @apply w-full border rounded p-2;
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
 }
 
 input:focus {
-  @apply outline-none border-blue-500 shadow-outline;
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
 }
 
 input[aria-invalid='true'] {
-  @apply border-red-500;
+  border-color: #dc2626;
 }
 
 input[aria-invalid='true']:focus {
-  @apply shadow-outline-red;
+  box-shadow: 0 0 0 1px #dc2626;
 }
-
-
 
 h2,
 h3,
 h4,
 h5,
 h6 {
-  @apply leading-tight mb-4;
+  line-height: 1.25;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  @apply text-2xl;
+  font-size: 1.5rem;
 }
 
 pre {
-  @apply bg-gray-100 p-4 rounded overflow-x-auto my-4;
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  margin: 1rem 0;
 }
 
 code {
-  @apply font-mono text-sm;
+  font-family: monospace;
+  font-size: 0.875rem;
 }

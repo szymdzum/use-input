@@ -1,10 +1,15 @@
 footer {
   position: sticky;
   bottom: 0;
-  @apply flex items-center justify-evenly p-4 bg-opacity-80 bg-gray-800;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  background-color: rgba(31, 41, 55, 0.8);
 }
 
 h1 {
   font-size: 1.5rem;
-  @apply font-bold inline;
+  font-weight: bold;
+  display: inline;
 }
