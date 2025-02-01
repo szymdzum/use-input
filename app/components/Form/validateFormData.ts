@@ -23,10 +23,10 @@ export type ValidationFailure<T> = {
 
 export type ValidationResult<T> = ValidationSuccess<T> | ValidationFailure<T>;
 
-export async function validateFormData<Schema extends FormSchema>(
+export function validateFormData<Schema extends FormSchema>(
   formData: FormData,
   schema: Schema,
-): Promise<ValidationResult<ValidatedData<Schema>>> {
+): ValidationResult<ValidatedData<Schema>> {
   const data: Record<string, unknown> = {};
   const errors: Record<string, string> = {};
 

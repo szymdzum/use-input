@@ -1,6 +1,6 @@
 import type { ReactElement } from '~/types/react';
 
-import { EmailValidator, booleanValidator, numberValidator } from '~/types/validators';
+import { EmailValidator, booleanValidator, nonEmptyString, numberValidator } from '~/types/validators';
 
 export default function Test(): ReactElement {
   const correct = EmailValidator.validate('test@test.com');
@@ -14,6 +14,15 @@ export default function Test(): ReactElement {
 
   const numberResult = numberValidator(666);
   console.log('numberResult', numberResult);
+
+  const stringResult = nonEmptyString.validate("hello");
+  console.log('stringResult', stringResult);
+
+  const stringResult2 = nonEmptyString.validate("");
+  console.log('stringResult2', stringResult2);
+
+  const stringResult3 = nonEmptyString.validate(null);
+  console.log('stringResult3', stringResult3);
 
   return <div>Test</div>;
 }

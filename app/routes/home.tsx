@@ -1,10 +1,6 @@
-import { NavLink } from "react-router"
-import { PasswordField } from "~/components/Password/PasswordField";
-import { EmailField } from '~/modules/EmailField';
-import { TextField } from '~/modules/TextField';
-import { UsernameField } from '~/modules/UsernameField';
-import type { Route } from './+types/home';
+import { Outlet } from "react-router"
 
+import type { Route } from './+types/home';
 
 export function meta(_: Route.MetaArgs) {
   return [
@@ -20,13 +16,9 @@ export function loader({ context }: Route.LoaderArgs) {
 export default function Home({ loaderData }: Route.ComponentProps) {
 
   return (
-    <div>
-      <p>{loaderData.message}</p>
-      <NavLink to="/login">Login</NavLink>
-      <TextField />
-      <UsernameField />
-      <EmailField />
-      <PasswordField name="password" showForgotPassword />
-    </div>
+      <section>
+        <Outlet />
+        <p>{loaderData.message}</p>
+      </section>
   );
 }

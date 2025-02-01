@@ -67,14 +67,20 @@ export const CheckWhatsThat: (value: unknown) => Result<string> = (value) => {
 
   return { value: trimmed };
 };
-
-// Example usage
-export const nonEmptyString: (value: string) => Result<string> = (value) => {
-  if (value.length === 0) {
-    return { issues: [{ message: "This string is not empty" }] };
+export const nonEmptyString = createValidator<string>((value) => {
+  // First check if it's a string
+  if (typeof value !== "string") {
+    return { issues: [{ message: "Value must be a string" }] };
   }
-  return { value };
-};
+
+  // Check for empty string after trimming
+  const trimmed = value.trim();
+  if (trimmed.length === 0) {
+    return { issues: [{ message: "Value cannot be empty" }] };
+  }
+
+  return { value: trimmed };
+});
 
 // Check the others
 export const nullValidator: (value: unknown) => Result<null> = (value) => {

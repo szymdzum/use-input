@@ -2,6 +2,7 @@ import type React from 'react';
 import {
   Links,
   Meta,
+  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -16,6 +17,18 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
+function NavBar() {
+  return (
+    <nav>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/register">Register</NavLink>
+      <NavLink to="/test">Test</NavLink>
+    </nav>
+  );
+}
+
+
 export function Layout({ children }: LayoutProps) {
   return (
     <html lang="en">
@@ -27,6 +40,7 @@ export function Layout({ children }: LayoutProps) {
         <Links />
       </head>
       <body>
+        <NavBar />
         <main>{children}</main>
         <ScrollRestoration />
         <Scripts />
