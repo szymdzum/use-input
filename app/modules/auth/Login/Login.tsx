@@ -1,6 +1,6 @@
 import { Submit } from '~/components/Button/Button';
 import { Form, validateFormData } from '~/components/Form';
-import { PasswordField, passwordRules } from '~/components/Password/PasswordField';
+import { PasswordField, passwordRules } from '~/components/Password/PasswordField/PasswordField';
 import { EmailField } from '~/modules/EmailField';
 import { TextDivider } from '~/modules/auth/Dividers/Dividers';
 import { FormHeader } from '~/modules/auth/FormHeader';
@@ -19,23 +19,21 @@ export async function action({
   return result;
 }
 
-export default function Login({ actionData }: Route.ComponentProps) {
+  const Login = ({ actionData }: Route.ComponentProps) => {
   console.log(actionData);
 
   return (
    <section className={styles.card}>
      <FormHeader>Sign In</FormHeader>
      <Form>
-        <EmailField />
-        <PasswordField />
-        <TextDivider>
-          and click the button
-        </TextDivider>
-       <Submit className="submitButton">
-         Sign In
-       </Submit>
-       <LinkToRegister />
+      <EmailField />
+      <PasswordField />
+      <TextDivider>and click the button</TextDivider>
+      <Submit>Sign In</Submit>
+      <LinkToRegister />
      </Form>
    </section>
   );
 }
+
+export default Login;

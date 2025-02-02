@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 import styles from "./Dividers.module.css";
 
 
-export const Dividers = () => {
+export const Dividers = (): ReactElement => {
   return (
     <div className={styles.dividers}>
       <p>or</p>

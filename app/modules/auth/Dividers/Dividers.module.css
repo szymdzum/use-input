@@ -12,7 +12,7 @@
 .dividerWithText {
   width: 100%;
   height: 1px;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   background: linear-gradient(to right,
       transparent,
       rgba(255, 255, 255, 0.1),

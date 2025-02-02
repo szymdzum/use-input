@@ -1,28 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { ValidationRule } from '~/modules/validation';
-import type { InputChange, InputFocus } from '~/types';
+import type { InputChange, InputFocus } from '~/types/react';
 import { useServerValidation } from './useServerValidation';
-
-type ValidationResult = {
-  /** Current value of the input field */
-  value: string;
-  /** Current error message, null if no error exists */
-  error: string | null;
-  /** Indicates whether the input is valid */
-  isValid: boolean;
-  /** Indicates whether the input has been modified by the user */
-  isDirty: boolean;
-  /**
-   * (onBlur) Validates the input value using the provided validator function
-   * @param event The focus event object
-   */
-  onBlurValidate: (event: InputFocus) => void;
-  /**
-   * (onChange) Handles input changes, updates the value and clears existing errors
-   * @param event The change event object
-   */
-  onChangeClear: (event: InputChange) => void;
-};
 
 export const useInput = (
   validationRule: ValidationRule = noValidation,
@@ -79,4 +58,25 @@ const getInputValue = (
   event: InputChange | InputFocus
 ): string => {
   return event?.target?.value?.trim() ?? '';
+};
+
+type ValidationResult = {
+  /** Current value of the input field */
+  value: string;
+  /** Current error message, null if no error exists */
+  error: string | null;
+  /** Indicates whether the input is valid */
+  isValid: boolean;
+  /** Indicates whether the input has been modified by the user */
+  isDirty: boolean;
+  /**
+   * (onBlur) Validates the input value using the provided validator function
+   * @param event The focus event object
+   */
+  onBlurValidate: (event: InputFocus) => void;
+  /**
+   * (onChange) Handles input changes, updates the value and clears existing errors
+   * @param event The change event object
+   */
+  onChangeClear: (event: InputChange) => void;
 };

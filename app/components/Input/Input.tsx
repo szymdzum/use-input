@@ -1,4 +1,5 @@
 import { useInput } from "~/hooks/useInput";
+import styles from "./Input.module.css";
 import { Label } from "./Label";
 import { Message } from "./Message";
 import { ariaOn, useInputIds } from "./helpers";
@@ -37,7 +38,7 @@ export const Input = ({
   const ariaDescribedBy = ariaOn(error).descriptionBy(descriptionId);
 
   return (
-    <div className="inputField">
+    <div className={styles.inputField}>
       <Label htmlFor={inputId} required={required}>
         {label}
       </Label>

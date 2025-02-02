@@ -30,9 +30,11 @@ export const Submit = ({ children, ...props }: ButtonProps) => {
   return (
     <Button
       type="submit"
-      className={styles.primaryButton}
+      className={styles.submitButton}
        {...props}>
       {children}
     </Button>
   );
 };
+
+export default Submit;

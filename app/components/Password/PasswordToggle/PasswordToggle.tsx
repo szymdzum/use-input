@@ -1,6 +1,7 @@
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { Show } from "../Input/Show";
+import { Show } from "../../Input/Show";
+import styles from "./PasswordToggle.module.css";
 
 type PasswordToggleProps = {
   onVisibilityChange: (isVisible: boolean) => void;
@@ -18,16 +19,16 @@ export const PasswordToggle = ({ onVisibilityChange }: PasswordToggleProps) => {
   return (
     <button
       type="button"
-      className="passwordToggle"
+      className={styles.toggleButton}
       onClick={toggleVisibility}
       aria-label={showPassword ? "Hide password" : "Show password"}
     >
       <Show if={showPassword}>
-        <EyeOff className="icon" />
+        <EyeOff className={styles.icon} />
       </Show>
 
       <Show if={!showPassword}>
-        <Eye className="icon" />
+        <Eye className={styles.icon} />
       </Show>
     </button>
   );

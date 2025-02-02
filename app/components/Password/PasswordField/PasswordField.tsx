@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Label } from "~/components/Input/Label";
 import { Message } from "~/components/Input/Message";
 import { useInput } from "~/hooks/useInput";
-import { Show } from "../Input/Show";
-import { ResetPasswordUrl } from "./LinkToRestPassword";
-import { PasswordToggle } from "./PasswordToggle";
+import { Show } from "../../Input/Show";
+import { LinkToResetPassword } from "../LinkToResetPassword/LinkToResetPassword";
+import { PasswordToggle } from "../PasswordToggle/PasswordToggle";
+import styles from "./PasswordField.module.css";
+
 
 type PasswordFieldProps = {
   name?: string;
@@ -45,16 +47,16 @@ export const PasswordField = ({
   );
 
   return (
-    <div className="inputField">
-      <div className="labelHeader">
+    <div className={styles.inputField}>
+      <div className={styles.labelHeader}>
         <Label htmlFor={name} required={required}>
           Password
         </Label>
         <Show if={showForgotPassword}>
-            <ResetPasswordUrl  />
+            <LinkToResetPassword  />
         </Show>
       </div>
-      <div className="inputWrapper">
+      <div className={styles.inputWrapper}>
         <input
           {...props}
           name={name}
