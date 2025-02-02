@@ -1,5 +1,3 @@
-import styles from "./Input.module.css";
-
 import { useInput } from "~/hooks/useInput";
 import { Label } from "./Label";
 import { Message } from "./Message";
@@ -39,11 +37,10 @@ export const Input = ({
   const ariaDescribedBy = ariaOn(error).descriptionBy(descriptionId);
 
   return (
-    <div className={styles.field}>
+    <div className="inputField">
       <Label htmlFor={inputId} required={required}>
         {label}
       </Label>
-
       <input
         {...props}
         name={name}
@@ -51,14 +48,13 @@ export const Input = ({
         id={inputId}
         value={value}
         required={required}
-        placeholder={placeholder}
         onBlur={onBlurValidate}
         onChange={onChangeClear}
         aria-invalid={isInvalid}
+        placeholder={placeholder}
         aria-errormessage={ariaErrorMessage}
         aria-describedby={ariaDescribedBy}
       />
-
       <Message
         name={name}
         error={error}

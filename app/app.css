@@ -1,16 +1,33 @@
-html,
-body {
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
-  background-color: #181a1b;
-  color: #e5e7eb;
+:root {
+  /* Typography */
+  --input-font-size: 0.875rem;
+  --input-message-font-size: 0.75rem;
+
+  /* Spacing */
+  --input-label-margin: 0.5rem;
+  --input-message-margin-top: 0.25rem;
+
+  /* Dimensions */
+  --input-border-radius: 0.375rem;
+  --input-padding: 0.5rem 0.75rem;
+
+  /* Colors */
+  --input-border-color: #d1d5db;
+  --input-border-color-focus: #2563eb;
+  --input-description-color: #6b7280;
+  --input-error-color: #dc2626;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {
-
   html,
   body {
-    background-color: #181a1b;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
     color-scheme: dark;
+
   }
 }
 
@@ -19,15 +36,8 @@ h5,
 h6 {
   font-weight: bold;
   line-height: 1.25;
-  margin-bottom: 1rem;
+
 }
-
-nav {
-  display: flex;
-  gap: 1rem;
-}
-
-
 
 
 pre {
@@ -41,4 +51,155 @@ pre {
 code {
   font-family: monospace;
   font-size: 0.875rem;
+}
+
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+
+  label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  input {
+    width: 100%;
+    max-width: 100%;
+    font-size: var(--input-font-size);
+    padding: var(--input-padding);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--input-border-radius);
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--input-border-color-focus);
+    box-shadow: 0 0 0 1px var(--input-border-color-focus);
+  }
+
+  input[aria-invalid='true'] {
+    border-color: var(--input-error-color);
+  }
+
+  input[aria-invalid='true']:focus {
+    box-shadow: 0 0 0 1px var(--input-error-color);
+  }
+}
+
+.inputDescription {
+  display: block;
+  font-size: var(--input-message-font-size);
+  color: var(--input-description-color);
+}
+
+.inputError {
+  display: block;
+  font-size: var(--input-message-font-size);
+  color: var(--input-error-color);
+}
+
+.labelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.resetPasswordLink {
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.resetPasswordLink:hover {
+  color: #f3f4f6;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.toggleButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+
+}
+
+.toggleButton:hover {
+  background-color: transparent;
+}
+
+.icon {
+  height: 1rem;
+  width: 1rem;
+  color: #9ca3af;
+}
+
+.submitButton {
+  width: 100%;
+  background-color: #2563eb;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #1d4ed8;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: #e0f2fe;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  color: #a1a1aa;
+  cursor: pointer;
+}
+
+.passwordToggle:hover {
+  color: #60a5fa;
+}
+
+.forgotPassword {
+  font-size: 0.875rem;
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+.forgotPassword:hover {
+  color: #93c5fd;
+}
+
+.signupText {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #a1a1aa;
+}
+
+.signupLink {
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+.signupLink:hover {
+  color: #93c5fd;
 }

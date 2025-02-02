@@ -1,4 +1,3 @@
-import styles from './Input.module.css';
 import { useInputIds } from './helpers';
 
 import { type ReactElement, memo } from 'react';
@@ -20,7 +19,7 @@ export const Message = memo(({
         role="alert"
         data-error
         id={errorId}
-        className={styles.error}
+        className="inputError"
       >
         {error}
       </div>
@@ -31,7 +30,7 @@ export const Message = memo(({
     return (
       <div
         id={descriptionId}
-        className={styles.description}
+        className="inputDescription"
       >
         {description}
       </div>

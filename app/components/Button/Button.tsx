@@ -28,7 +28,10 @@ export type { ButtonProps };
 
 export const Submit = ({ children, ...props }: ButtonProps) => {
   return (
-    <Button type="submit" className={styles.primaryButton} {...props}>
+    <Button
+      type="submit"
+      className={styles.primaryButton}
+       {...props}>
       {children}
     </Button>
   );

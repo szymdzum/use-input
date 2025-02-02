@@ -24,16 +24,16 @@ export default function Login({ actionData }: Route.ComponentProps) {
   console.log(actionData);
 
   return (
-   <section className={styles.card}>
+   <section className="card">
      <Title>Sign In</Title>
-     <div className=  {styles.divider} />
+     <div className="divider" />
      <Form>
         <EmailField />
         <PasswordField />
         <TextDivider>
           and click the button
         </TextDivider>
-       <Submit type="submit">
+       <Submit className="submitButton">
          Sign In
        </Submit>
        <LinkToRegistration />

@@ -1,11 +1,11 @@
 import { Link } from "react-router";
 
-export const LinkToRestPassword = () => {
+export const ResetPasswordUrl = () => {
   return (
-   <Link to="/reset">
+   <Link to="/reset" className="resetPasswordLink">
       Forgot password?
     </Link>
   );
 };
 
-LinkToRestPassword.displayName = "ForgotPassword";
+ResetPasswordUrl.displayName = "ResetPasswordUrl";

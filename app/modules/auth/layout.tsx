@@ -6,13 +6,13 @@ import styles from './layout.module.css';
 export default function AuthLayout(): ReactElement {
 
   return (
-        <div className={styles.twoColumnGrid}>
-            <div className={styles.formWrapper}>
-              <Outlet />
-            </div>
-          <div className={styles.starsSection}>
-            <Stars />
-          </div>
+    <div className={styles.twoColumnGrid}>
+        <div className={styles.formWrapper}>
+          <Outlet />
         </div>
+      <div className={styles.starsSection}>
+        <Stars />
+      </div>
+    </div>
   );
 }

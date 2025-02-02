@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Label } from "~/components/Input/Label";
-
+import { Message } from "~/components/Input/Message";
 import { useInput } from "~/hooks/useInput";
-import styles from "../Input/Input.module.css";
-import { Message } from "../Input/Message";
+import { ResetPasswordUrl } from "./LinkToRestPassword";
+
 import { Show } from "../Input/Show";
-import { LinkToRestPassword } from "./LinkToRestPassword";
-import passwordStyles from "./Password.module.css";
-import { TypeToggle } from "./TypeToggle";
+import { PasswordToggle } from "./PasswordToggle";
 
 type PasswordFieldProps = {
   name?: string;
@@ -31,7 +29,7 @@ export const PasswordField = ({
   label = "Password",
   required = true,
   disabled,
-  showForgotPassword,
+  showForgotPassword = true,
   onForgotPassword,
   ...props
 }: PasswordFieldProps) => {
@@ -42,36 +40,35 @@ export const PasswordField = ({
   error,
   onBlurValidate,
   onChangeClear,
-
   } = useInput(
     passwordRules,
     name
   );
 
   return (
-    <div className={styles.field}>
-      <div className={passwordStyles.header}>
+    <div className="inputField">
+      <div className="labelHeader">
         <Label htmlFor={name} required={required}>
           Password
         </Label>
-
         <Show if={showForgotPassword}>
-          <LinkToRestPassword  />
+            <ResetPasswordUrl  />
         </Show>
       </div>
-
-      <div className={passwordStyles.inputWrapper}>
+      <div className="inputWrapper">
         <input
           {...props}
+          name={name}
           value={value}
           onChange={onChangeClear}
           onBlur={onBlurValidate}
-          name={name}
-          type={showPassword ? "text" : "password"}
           disabled={disabled}
           required={required}
+          type={showPassword ? "text" : "password"}
         />
-        <TypeToggle onVisibilityChange={setShowPassword} />
+        <PasswordToggle
+           onVisibilityChange={setShowPassword}
+        />
       </div>
       <Message
         name={name}
