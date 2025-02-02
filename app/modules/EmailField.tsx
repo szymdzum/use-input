@@ -8,8 +8,8 @@ export const EmailField = () => {
       name="email"
       label="Email"
       type="email"
-      placeholder="Enter your email"
-      description="Please enter a valid email address"
+      placeholder="your@email.com"
+      description="Please enter your email address"
       validation={isEmail}
       required
     />

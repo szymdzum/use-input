@@ -1,0 +1,54 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1.5rem 2rem;
+  background-color: rgba(31, 41, 55, 0.8);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(243 244 246);
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.link {
+  color: rgb(209 213 219);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.link:hover {
+  color: rgb(243 244 246);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.activeLink {
+  color: rgb(243 244 246);
+  font-weight: 500;
+}
+
+.activeLink::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 2px;
+  background-color: rgb(59 130 246);
+  border-radius: 1px;
+}

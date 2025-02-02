@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from "react";
-import type { ValidationRule } from "../../ui/validation";
+import type { ValidationRule } from "../../modules/validation";
 
 export type InputProps = {
   name: string;

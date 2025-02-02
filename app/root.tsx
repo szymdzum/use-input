@@ -1,4 +1,3 @@
-import type React from 'react';
 import {
   Links,
   Meta,
@@ -8,25 +7,28 @@ import {
   isRouteErrorResponse,
 } from 'react-router';
 
+import type { ReactNode } from 'react';
 import type { Route } from './+types/root';
+import NavBar from './components/NavBar/NavBar';
 import { links } from './links'; // Import the links array
 export { links }; // Re-export the links array
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+         <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
-        <main>{children}</main>
+        <main>
+          {children}
+          <NavBar />
+        </main>
+
         <ScrollRestoration />
         <Scripts />
       </body>

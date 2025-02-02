@@ -8,8 +8,9 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig(({ isSsrBuild, command }) => ({
   resolve: {
     alias: {
-      '@types': path.resolve(__dirname, 'app/types')
-    }
+      '@types': path.resolve(__dirname, 'app/types'),
+      '~': path.resolve(__dirname, './app'),
+    },
   },
   build: {
     rollupOptions: isSsrBuild
@@ -21,6 +22,9 @@ export default defineConfig(({ isSsrBuild, command }) => ({
   css: {
     postcss: {
       plugins: [tailwindcss, autoprefixer],
+    },
+    modules: {
+      localsConvention: 'camelCase',
     },
   },
   ssr: {

@@ -1,14 +1,7 @@
 import { Input } from '../components/Input/Input';
-import { combineRules, maxLength, minLength, required } from './validation';
-
+import { usernameRules } from './validation';
 
 export const UsernameField = () => {
-  const usernameRules = combineRules(
-    required,
-    minLength(3),
-    maxLength(20)
-  );
-
   return (
     <Input
       name="username"

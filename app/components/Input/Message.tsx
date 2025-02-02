@@ -20,7 +20,7 @@ export const Message = memo(({
         role="alert"
         data-error
         id={errorId}
-        className={styles.error}
+        className={styles.inputError}
       >
         {error}
       </div>
@@ -31,7 +31,7 @@ export const Message = memo(({
     return (
       <div
         id={descriptionId}
-        className={styles.description}
+        className={styles.inputDescription}
       >
         {description}
       </div>

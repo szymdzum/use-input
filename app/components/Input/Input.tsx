@@ -1,13 +1,11 @@
-import styles from "./Input.module.css";
-
 import { useInput } from "~/hooks/useInput";
+import styles from "./Input.module.css";
 import { Label } from "./Label";
 import { Message } from "./Message";
-import { ariaAttributes, useInputIds } from "./helpers";
+import { ariaOn, useInputIds } from "./helpers";
 
-import type { ReactElement } from "react";
+import type { ReactElement } from "~/types/react";
 import type { InputProps } from "./types";
-
 
 export const Input = ({
   name,
@@ -27,7 +25,7 @@ export const Input = ({
     isValid,
     onBlurValidate,
     onChangeClear,
-  } = useInput(validation);
+  } = useInput(validation, name);
 
   const ids = useInputIds(name);
   const inputId = ids.inputId;
@@ -36,11 +34,11 @@ export const Input = ({
 
   const isInvalid = isDirty && !isValid;
 
-  const ariaErrorMessage = ariaAttributes(error).errorMessage(errorId);
-  const ariaDescribedBy = ariaAttributes(error).descriptionBy(descriptionId);
+  const ariaErrorMessage = ariaOn(error).errorMessage(errorId);
+  const ariaDescribedBy = ariaOn(error).descriptionBy(descriptionId);
 
   return (
-    <div className={styles.field}>
+    <div className={styles.inputField}>
       <Label htmlFor={inputId} required={required}>
         {label}
       </Label>
@@ -51,14 +49,13 @@ export const Input = ({
         id={inputId}
         value={value}
         required={required}
-        placeholder={placeholder}
         onBlur={onBlurValidate}
         onChange={onChangeClear}
         aria-invalid={isInvalid}
+        placeholder={placeholder}
         aria-errormessage={ariaErrorMessage}
         aria-describedby={ariaDescribedBy}
       />
-
       <Message
         name={name}
         error={error}

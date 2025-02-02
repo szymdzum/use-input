@@ -1,6 +1,5 @@
-import { EmailField } from '~/ui/EmailField';
-import { TextField } from '~/ui/TextField';
-import { UsernameField } from '~/ui/UsernameField';
+import { Outlet } from "react-router"
+
 import type { Route } from './+types/home';
 
 export function meta(_: Route.MetaArgs) {
@@ -16,13 +15,10 @@ export function loader({ context }: Route.LoaderArgs) {
 
 export default function Home({ loaderData }: Route.ComponentProps) {
 
-
   return (
-    <div>
-      <p>{loaderData.message}</p>
-      <TextField />
-      <UsernameField />
-      <EmailField />
-    </div>
+      <section>
+        <Outlet />
+        <p>{loaderData.message}</p>
+      </section>
   );
 }
