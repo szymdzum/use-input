@@ -31,14 +31,14 @@
   }
 }
 
+h3,
 h4,
 h5,
 h6 {
   font-weight: bold;
   line-height: 1.25;
-
+  margin: 0;
 }
-
 
 pre {
   background-color: #f3f4f6;
@@ -52,7 +52,6 @@ code {
   font-family: monospace;
   font-size: 0.875rem;
 }
-
 
 .inputField {
   display: flex;

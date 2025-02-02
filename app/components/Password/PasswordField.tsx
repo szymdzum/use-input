@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Label } from "~/components/Input/Label";
 import { Message } from "~/components/Input/Message";
 import { useInput } from "~/hooks/useInput";
-import { ResetPasswordUrl } from "./LinkToRestPassword";
-
 import { Show } from "../Input/Show";
+import { ResetPasswordUrl } from "./LinkToRestPassword";
 import { PasswordToggle } from "./PasswordToggle";
 
 type PasswordFieldProps = {
