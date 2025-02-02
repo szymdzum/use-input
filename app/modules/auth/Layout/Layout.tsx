@@ -4,7 +4,7 @@ import type { ReactElement } from '~/types/react';
 import type { Route } from './+types/Layout';
 import styles from './Layout.module.css';
 
-export default function Layout(): ReactElement {
+const Layout = (): ReactElement => {
   return (
     <div className={styles.columnGrid}>
       <div className={styles.formWrapper}>
@@ -18,3 +18,5 @@ export default function Layout(): ReactElement {
 }
 
 Layout.displayName = "Layout";
+
+export default Layout;
