@@ -13,6 +13,11 @@
       "coreTechnologies": ["React 19 (with hooks)", "TypeScript", "PNPM"],
       "lintingFormattingRules": ["Biome", "Prettier configurations"],
       "reactBestPractices": ["typed hooks", "context", "generics"],
+         "stylingApproach": {
+      "preferred": "CSS Modules",
+      "rationale": "Preferred for better encapsulation and maintainability over Tailwind CSS",
+      "location": "Component-specific .module.css files alongside their components"
+    }
     },
   "mandatoryLintingRules":
     {

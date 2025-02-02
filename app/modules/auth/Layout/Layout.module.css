@@ -1,23 +1,15 @@
-body {
-  width: 100%;
-  background-color: var(--zinc-900);
-  overflow-y: hidden;
-}
 
 .columnGrid {
-  min-height: 100%;
-  height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: 100%;
+  overflow: hidden;
   background-color: rgba(39, 39, 42, 0.3);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4px);
 }
 
 .formWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   margin: 0 auto;
   max-width: 30rem;
   width: 100%;
