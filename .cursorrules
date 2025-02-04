@@ -1,74 +1,74 @@
 {
-  "version": "1.0",
-  "compulsory": "Review and adhere to the rules in this file before making any modifications to the codebase. This file serves as the central source of truth for project standards and guidelines. Ignoring these rules can lead to inconsistencies, accessibility issues, and technical debt.",
-  "coreTechnologiesSetup":
-    {
-      "JavaScriptRuntime": "PNPM is REQUIRED for package management. Use 'pnpm install' to install dependencies.",
-      "TypeScript": "Ensure type-safe code and strict type checking. Refer to tsconfig.json for recommended settings.",
-      "Biome": "Enforces linting, formatting, and advanced code rules. Run 'pnpm biome check --write' to lint and auto-fix code.",
-      "Prettier": "Integrated into Biome for consistent code formatting.",
-    },
-  "compulsoryDevelopmentNotes":
-    {
-      "coreTechnologies": ["React 19 (with hooks)", "TypeScript", "PNPM"],
-      "lintingFormattingRules": ["Biome", "Prettier configurations"],
-      "reactBestPractices": ["typed hooks", "context", "generics"],
-         "stylingApproach": {
-      "preferred": "CSS Modules",
-      "rationale": "Preferred for better encapsulation and maintainability over Tailwind CSS",
-      "location": "Component-specific .module.css files alongside their components"
-    }
-    },
-  "mandatoryLintingRules":
-    {
-      "BiomeConfiguration":
-        [
-          "Enforce return-await in async functions",
-          "Ensure noImplicitAny and other strict TypeScript settings",
-          "Format code with Prettier automatically",
-        ],
-      "runCommand": "pnpm biome check --write",
-    },
-  "testingRequirements":
-    { "passTestsBeforeMerging": true, "command": "pnpm test" },
-  "repositoryEntryPointRules": "Always start from here",
-  "on_init":
-    {
-      "step": ["rules", "reminders and reasons"],
-      "action": "check .cursorrules and docs/ before each modification",
-    },
-  "documentation":
-    {
-      "required_reference":
-        {
-          "path": "./docs",
-          "files":
-            [
-              "project-overview.md",
-              "planning/step-by-step-plan.md",
-              "guidelines/development-guidelines.md",
-              "changelog/changelog.md",
-            ],
-        },
-    },
-  "workflow":
-    {
-      "approach": "iterative",
-      "steps":
-        [
-          "understand_requirements",
-          "consult_documentation",
-          "implement_basic_solution",
-          "refine_iteratively",
-          "validate_accessibility",
-          "update_changelog",
-        ],
-    },
-  "componentStructure":
-    {
-      "structure": "atomic",
-      "naming": { "pattern": "PascalCase", "examples": ["PasswordField"] },
-    },
+"version": "1.0",
+"compulsory": "Review and adhere to the rules in this file before making any modifications to the codebase. This file serves as the central source of truth for project standards and guidelines. Ignoring these rules can lead to inconsistencies, accessibility issues, and technical debt.",
+"coreTechnologiesSetup":
+{
+"JavaScriptRuntime": "PNPM is REQUIRED for package management. Use 'pnpm install' to install dependencies.",
+"TypeScript": "Ensure type-safe code and strict type checking. Refer to tsconfig.json for recommended settings.",
+"Biome": "Enforces linting, formatting, and advanced code rules. Run 'pnpm biome check --write' to lint and auto-fix code.",
+"Prettier": "Integrated into Biome for consistent code formatting.",
+},
+"compulsoryDevelopmentNotes":
+{
+"coreTechnologies": ["React 19 (with hooks)", "TypeScript", "PNPM"],
+"lintingFormattingRules": ["Biome", "Prettier configurations"],
+"reactBestPractices": ["typed hooks", "context", "generics"],
+"stylingApproach": {
+"preferred": "CSS Modules",
+"rationale": "Preferred for better encapsulation and maintainability over Tailwind CSS",
+"location": "Component-specific .module.css files alongside their components"
+}
+},
+"mandatoryLintingRules":
+{
+"BiomeConfiguration":
+[
+"Enforce return-await in async functions",
+"Ensure noImplicitAny and other strict TypeScript settings",
+"Format code with Prettier automatically",
+],
+"runCommand": "pnpm biome check --write",
+},
+"testingRequirements":
+{ "passTestsBeforeMerging": true, "command": "pnpm test" },
+"repositoryEntryPointRules": "Always start from here",
+"on_init":
+{
+"step": ["rules", "reminders and reasons"],
+"action": "check .cursorrules and docs/ before each modification",
+},
+"documentation":
+{
+"required_reference":
+{
+"path": "./docs",
+"files":
+[
+"project-overview.md",
+"planning/step-by-step-plan.md",
+"guidelines/development-guidelines.md",
+"changelog/changelog.md",
+],
+},
+},
+"workflow":
+{
+"approach": "iterative",
+"steps":
+[
+"understand_requirements",
+"consult_documentation",
+"implement_basic_solution",
+"refine_iteratively",
+"validate_accessibility",
+"update_changelog",
+],
+},
+"componentStructure":
+{
+"structure": "atomic",
+"naming": { "pattern": "PascalCase", "examples": ["PasswordField"] },
+},
 }
 
 # Cursor Development Rules
@@ -219,18 +219,17 @@ Always check these files for current project state before any work:
 1. Client Components:
 
 ```tsx
-"use client";
 const ComponentName = () => {
   // Component logic
 };
 ```
 
-2. Props Interface:
+2. Props Type:
 
 ```tsx
-interface ComponentNameProps {
+type ComponentNameProps = {
   // Props definition
-}
+};
 const ComponentName = ({ prop1, prop2 }: ComponentNameProps) => {
   // Component logic
 };
@@ -255,7 +254,7 @@ async function getData() {
  * Clear description of the type's purpose and context.
  * Include any important notes about usage or constraints.
  */
-export interface ExampleType {
+type ExampleType = {
   /** Description with value range if applicable (e.g., 0-1) */
   numericField: number;
   /** Description of what this field represents */
@@ -265,7 +264,7 @@ export interface ExampleType {
     /** Nested field description */
     nestedField: string;
   };
-}
+};
 ```
 
 Type Documentation Rules:

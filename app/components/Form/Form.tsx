@@ -1,4 +1,4 @@
-import { Form as BaseForm, type FormProps as BaseFormProps } from 'react-router';
+import { Form as BaseForm } from 'react-router';
 import type { FormEvent, ReactNode } from '~/types/react';
 import { ErrorBoundary } from '../ErrorBoundary';
 

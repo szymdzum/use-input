@@ -12,7 +12,6 @@ type PasswordFieldProps = {
   name?: string;
   label?: string;
   required?: boolean;
-  disabled?: boolean;
   showForgotPassword?: boolean;
   onForgotPassword?: () => void;
 };
@@ -29,7 +28,6 @@ export const PasswordField = ({
   name = "password",
   label = "Password",
   required = true,
-  disabled,
   showForgotPassword = true,
   onForgotPassword,
   ...props
@@ -63,8 +61,6 @@ export const PasswordField = ({
           value={value}
           onChange={onChangeClear}
           onBlur={onBlurValidate}
-          disabled={disabled}
-          required={required}
           type={showPassword ? "text" : "password"}
         />
         <PasswordToggle
