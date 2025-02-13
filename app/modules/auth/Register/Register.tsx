@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { PasswordField, passwordRules } from '~/components/Password/PasswordField/PasswordField';
-import { useInput } from '~/hooks/useInput';
 import { usePasswordValidation } from '~/hooks/usePasswordValidation';
 
 const Register = () => {
@@ -23,7 +22,7 @@ const Register = () => {
         name="password1"
         label="Password"
         value={password1.value}
-        onChange={(e) => password1.onChange(e.target.value)}
+        onChange={password1.onChange}
         error={password1.error}
       />
 
@@ -31,7 +30,7 @@ const Register = () => {
         name="password2"
         label="Confirm Password"
         value={password2.value}
-        onChange={(e) => password2.onChange(e.target.value)}
+        onChange={password2.onChange}
         error={password2.error || matchError}
       />
     </div>

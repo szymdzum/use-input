@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { type ChangeEvent, useState } from "react";
 import { Label } from "~/components/Input/Label";
 import { Message } from "~/components/Input/Message";
@@ -9,14 +10,26 @@ import styles from "./PasswordField.module.css";
 
 
 type PasswordFieldProps = {
+  /** HTML input name attribute - defaults to "password" */
   name?: string;
+  /** Label text - defaults to "Password" */
   label?: string;
+  /** Marks as required field - defaults to true */
   required?: boolean;
+  /** Shows forgot password link - defaults to true */
   showForgotPassword?: boolean;
+  /** Callback for forgot password click */
   onForgotPassword?: () => void;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  /** Controlled input value */
+  value?: string;
+  /** Change handler with direct value access */
+  onChange?: (value: string) => void; // Simplified signature
+  /** Validation error message */
   error?: string | null;
+  /** Additional class names */
+  className?: string;
+  /** HTML id attribute */
+  id?: string;
 };
 
 export const passwordRules = (value: string) => {
@@ -36,6 +49,8 @@ export const PasswordField = ({
   value,
   onChange,
   error,
+  className,
+  id,
   ...props
 }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +58,7 @@ export const PasswordField = ({
  const { onBlurValidate } = useInput(passwordRules, name);
 
   return (
-    <div className={styles.inputField}>
+    <div className={`${styles.inputField} ${className || ''}`} id={id}>
       <div className={styles.labelHeader}>
         <Label htmlFor={name} required={required}>
           Password
@@ -56,8 +71,11 @@ export const PasswordField = ({
         <input
           {...props}
           name={name}
+          id={id}
           value={value}
-          onChange={onChange}
+          // im sorry for this
+          onChange={(e) => onChange?.(e.target.value)}
+          className={clsx(styles.input, className)}
           onBlur={onBlurValidate}
           type={showPassword ? "text" : "password"}
         />
