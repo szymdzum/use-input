@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import { Label } from "~/components/Input/Label";
 import { Message } from "~/components/Input/Message";
 import { useInput } from "~/hooks/useInput";
@@ -14,6 +14,9 @@ type PasswordFieldProps = {
   required?: boolean;
   showForgotPassword?: boolean;
   onForgotPassword?: () => void;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  error?: string | null;
 };
 
 export const passwordRules = (value: string) => {
@@ -30,19 +33,14 @@ export const PasswordField = ({
   required = true,
   showForgotPassword = true,
   onForgotPassword,
+  value,
+  onChange,
+  error,
   ...props
 }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
- const {
-  value,
-  error,
-  onBlurValidate,
-  onChangeClear,
-  } = useInput(
-    passwordRules,
-    name
-  );
+ const { onBlurValidate } = useInput(passwordRules, name);
 
   return (
     <div className={styles.inputField}>
@@ -59,7 +57,7 @@ export const PasswordField = ({
           {...props}
           name={name}
           value={value}
-          onChange={onChangeClear}
+          onChange={onChange}
           onBlur={onBlurValidate}
           type={showPassword ? "text" : "password"}
         />

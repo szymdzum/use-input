@@ -1,11 +1,12 @@
-import type React from "react";
 import { useInput } from "~/hooks/useInput";
-  import type { FormEvent, InvalidEvent, ReactElement } from "~/types/react";
-import styles from "./Input.module.css";
 import { Label } from "./Label";
 import { Message } from "./Message";
 import { ariaOn, useInputIds } from "./helpers";
+
+import type { ReactElement } from "~/types/react";
 import type { InputProps } from "./types";
+
+import styles from "./Input.module.css";
 
 export const Input = ({
   name,
@@ -26,8 +27,6 @@ export const Input = ({
     onBlurValidate,
     onChangeClear,
   } = useInput(validation, name);
-
-
 
   const ids = useInputIds(name);
   const inputId = ids.inputId;

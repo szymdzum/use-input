@@ -26,7 +26,7 @@ export async function action({
   return (
    <section className={styles.card}>
      <FormHeader>Sign In</FormHeader>
-     <Form>
+     <Form noValidate>
       <EmailField />
       <PasswordField />
       <TextDivider>and click the button</TextDivider>
