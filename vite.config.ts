@@ -15,8 +15,8 @@ export default defineConfig(({ isSsrBuild, command }) => ({
   build: {
     rollupOptions: isSsrBuild
       ? {
-          input: './server/app.ts',
-        }
+        input: './server/app.ts',
+      }
       : undefined,
   },
   css: {
@@ -31,4 +31,9 @@ export default defineConfig(({ isSsrBuild, command }) => ({
     noExternal: command === 'build' ? true : undefined,
   },
   plugins: [reactRouter(), tsconfigPaths()],
+  server: {
+    allowedHosts: [
+      '2jk8sj-3000.csb.app',
+    ],
+  },
 }));
