@@ -1,11 +1,12 @@
 import { useInput } from "~/hooks/useInput";
-import styles from "./Input.module.css";
 import { Label } from "./Label";
 import { Message } from "./Message";
 import { ariaOn, useInputIds } from "./helpers";
 
 import type { ReactElement } from "~/types/react";
 import type { InputProps } from "./types";
+
+import styles from "./Input.module.css";
 
 export const Input = ({
   name,
@@ -33,7 +34,6 @@ export const Input = ({
   const descriptionId = ids.descriptionId;
 
   const isInvalid = isDirty && !isValid;
-
   const ariaErrorMessage = ariaOn(error).errorMessage(errorId);
   const ariaDescribedBy = ariaOn(error).descriptionBy(descriptionId);
 
@@ -51,10 +51,20 @@ export const Input = ({
         required={required}
         onBlur={onBlurValidate}
         onChange={onChangeClear}
-        aria-invalid={isInvalid}
         placeholder={placeholder}
+        aria-required="true"
         aria-errormessage={ariaErrorMessage}
         aria-describedby={ariaDescribedBy}
+        aria-invalid={isInvalid}
+        /**
+         * Disable spellcheck, autocomplete, autocorrect, and autocapitalize
+         * to prevent browser from suggesting or correcting input
+        */
+        spellCheck="false"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+
       />
       <Message
         name={name}

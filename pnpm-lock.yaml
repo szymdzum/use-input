@@ -26,6 +26,9 @@ importers:
       '@vercel/node':
         specifier: ^3.2.25
         version: 3.2.29
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       express:
         specifier: ^4.21.1
         version: 4.21.2

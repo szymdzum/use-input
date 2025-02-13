@@ -1,4 +1,5 @@
-import { useState } from "react";
+import clsx from "clsx";
+import { type ChangeEvent, useState } from "react";
 import { Label } from "~/components/Input/Label";
 import { Message } from "~/components/Input/Message";
 import { useInput } from "~/hooks/useInput";
@@ -9,12 +10,26 @@ import styles from "./PasswordField.module.css";
 
 
 type PasswordFieldProps = {
+  /** HTML input name attribute - defaults to "password" */
   name?: string;
+  /** Label text - defaults to "Password" */
   label?: string;
+  /** Marks as required field - defaults to true */
   required?: boolean;
-  disabled?: boolean;
+  /** Shows forgot password link - defaults to true */
   showForgotPassword?: boolean;
+  /** Callback for forgot password click */
   onForgotPassword?: () => void;
+  /** Controlled input value */
+  value?: string;
+  /** Change handler with direct value access */
+  onChange?: (value: string) => void; // Simplified signature
+  /** Validation error message */
+  error?: string | null;
+  /** Additional class names */
+  className?: string;
+  /** HTML id attribute */
+  id?: string;
 };
 
 export const passwordRules = (value: string) => {
@@ -29,25 +44,21 @@ export const PasswordField = ({
   name = "password",
   label = "Password",
   required = true,
-  disabled,
   showForgotPassword = true,
   onForgotPassword,
+  value,
+  onChange,
+  error,
+  className,
+  id,
   ...props
 }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
- const {
-  value,
-  error,
-  onBlurValidate,
-  onChangeClear,
-  } = useInput(
-    passwordRules,
-    name
-  );
+ const { onBlurValidate } = useInput(passwordRules, name);
 
   return (
-    <div className={styles.inputField}>
+    <div className={`${styles.inputField} ${className || ''}`} id={id}>
       <div className={styles.labelHeader}>
         <Label htmlFor={name} required={required}>
           Password
@@ -60,11 +71,12 @@ export const PasswordField = ({
         <input
           {...props}
           name={name}
+          id={id}
           value={value}
-          onChange={onChangeClear}
+          // im sorry for this
+          onChange={(e) => onChange?.(e.target.value)}
+          className={clsx(styles.input, className)}
           onBlur={onBlurValidate}
-          disabled={disabled}
-          required={required}
           type={showPassword ? "text" : "password"}
         />
         <PasswordToggle

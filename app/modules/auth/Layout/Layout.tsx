@@ -1,7 +1,7 @@
 import { Stars } from 'lucide-react';
 import { Outlet } from 'react-router';
 import type { ReactElement } from '~/types/react';
-import type { Route } from './+types/Layout';
+
 import styles from './Layout.module.css';
 
 const Layout = (): ReactElement => {

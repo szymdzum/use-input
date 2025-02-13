@@ -1,3 +1,4 @@
+import type { InvalidEvent } from 'react';
 import { Submit } from '~/components/Button/Button';
 import { Form, validateFormData } from '~/components/Form';
 import { PasswordField, passwordRules } from '~/components/Password/PasswordField/PasswordField';
@@ -25,7 +26,7 @@ export async function action({
   return (
    <section className={styles.card}>
      <FormHeader>Sign In</FormHeader>
-     <Form>
+     <Form noValidate>
       <EmailField />
       <PasswordField />
       <TextDivider>and click the button</TextDivider>
