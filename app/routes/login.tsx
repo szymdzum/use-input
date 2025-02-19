@@ -1,6 +1,8 @@
-import { type FormEvent, useState } from 'react';
-import { Link } from 'react-router';
-import { Form, validateFormData } from '~/components/Form';
+import { ApiMessage } from '~/components/ApiMessage';
+import { Form, createServerError, validateFormData } from '~/components/Form';
+import type { ValidationResult } from '~/components/Form/validateFormData';
+import { LoginFooter } from '~/components/LoginFooter';
+import { SubmitButton } from '~/components/SubmitButton';
 import { EmailField } from '~/modules/EmailField';
 import { PasswordField } from '~/modules/PasswordField';
 import { validatePassword } from '~/modules/PasswordField';
@@ -13,7 +15,7 @@ export async function action({
 }: Route.ActionArgs) {
   const formData = await request.formData();
 
-    const result = validateFormData(formData, {
+  const result = validateFormData(formData, {
     email: isEmail,
     password: validatePassword
   });
@@ -22,63 +24,48 @@ export async function action({
     return { errors: result.errors };
   }
 
-  const { email, password } = result.data;
-  // ... login logic
-  console.log(email, password);
-  return { success: true };
+  try {
+    if (result.data.email !== 'test@example.com' || result.data.password !== 'Password123!') {
+      return createServerError('Invalid email or password', 401);
+    }
+
+    return {
+      success: true,
+      data: result.data
+    };
+  } catch (error) {
+    console.error('Login error:', error);
+
+    if (error instanceof Error) {
+      return createServerError(error.message, 500);
+    }
+
+    return createServerError('An unexpected error occurred during login', 500);
+  }
 }
 
-export default function Login() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+type LoginFormProps = {
+  actionData: ValidationResult<{ email: string; password: string }> | undefined;
+};
 
-  const handleSubmit = (e: FormEvent) => {
-    const form = e.currentTarget as HTMLFormElement;
-
-    // Check for required fields
-    const requiredFields = form.querySelectorAll('[required]');
-    let hasEmptyRequired = false;
-
-    for (const field of requiredFields) {
-      if (!(field as HTMLInputElement).value) {
-        hasEmptyRequired = true;
-        (field as HTMLInputElement).focus();
-        break;
-      }
-    }
-
-    // Check for error states
-    const invalidFields = form.querySelectorAll('[aria-invalid="true"]');
-
-    if (hasEmptyRequired || invalidFields.length > 0) {
-      e.preventDefault();
-      return;
-    }
-
-    setIsSubmitting(true);
-  };
+export default function Login({ actionData }: LoginFormProps) {
 
   return (
     <div className="login-container">
       <div className="login-card">
         <h1>Welcome Back</h1>
-        <Form method="POST" onSubmit={handleSubmit} noValidate>
+        {actionData && 'error' in actionData && (
+          <ApiMessage
+            message={actionData.error as string}
+            className="error-message"
+          />
+        )}
+        <Form method="POST" noValidate>
           <EmailField />
           <PasswordField />
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="submit-button"
-          >
-            {isSubmitting && <span className="spinner" />}
-            {isSubmitting ? 'Signing in...' : 'Sign In'}
-          </button>
+          <SubmitButton label="Sign In" />
         </Form>
-        <div className="login-footer">
-          <p>
-            Don't have an account? <Link to="/register">Sign up</Link>
-          </p>
-          <Link to="/forgot-password">Forgot password?</Link>
-        </div>
+        <LoginFooter />
       </div>
     </div>
   );

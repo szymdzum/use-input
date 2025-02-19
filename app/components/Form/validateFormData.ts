@@ -23,6 +23,20 @@ export type ValidationFailure<T> = {
 
 export type ValidationResult<T> = ValidationSuccess<T> | ValidationFailure<T>;
 
+export type ServerError = {
+  success: false;
+  error: string;
+  status: number;
+};
+
+export function createServerError(message: string, status = 400): ServerError {
+  return {
+    success: false,
+    error: message,
+    status,
+  };
+}
+
 export function validateFormData<Schema extends FormSchema>(
   formData: FormData,
   schema: Schema,
