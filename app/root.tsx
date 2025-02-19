@@ -1,34 +1,28 @@
+import type { ReactNode } from 'react';
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
-  isRouteErrorResponse,
+  ScrollRestoration
 } from 'react-router';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { Footer } from './components/Footer';
+import { Header } from './components/Header';
+export { links } from './links';
 
-import type { ReactNode } from 'react';
-import type { Route } from './+types/root';
-import NavBar from './components/NavBar/NavBar';
-import { links } from './links'; // Import the links array
-export { links }; // Re-export the links array
-
-export function Layout({ children }: { children: ReactNode }) {
+// Document component to handle the HTML structure
+function Document({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-         <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
-        <main>
-          {children}
-          <NavBar />
-        </main>
-
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -36,35 +30,24 @@ export function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-export default function App() {
-  return <Outlet />;
+// Layout component for the content structure
+function Layout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = 'Oops!';
-  let details = 'An unexpected error occurred.';
-  let stack: string | undefined;
-
-  if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? '404' : 'Error';
-    details =
-      error.status === 404
-        ? 'The requested page could not be found.'
-        : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
-  }
-
+export default function App() {
+  // Only wrap Outlet with Layout once
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <Document>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </Document>
   );
 }

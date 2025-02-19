@@ -1,4 +1,3 @@
-import type { InvalidEvent } from 'react';
 import { Submit } from '~/components/Button/Button';
 import { Form, validateFormData } from '~/components/Form';
 import { PasswordField, passwordRules } from '~/components/Password/PasswordField/PasswordField';

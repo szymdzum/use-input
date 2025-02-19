@@ -1,5 +1,3 @@
-import { Outlet } from "react-router"
-
 import type { Route } from './+types/home';
 
 export function meta(_: Route.MetaArgs) {
@@ -14,11 +12,5 @@ export function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-
-  return (
-      <section>
-        <Outlet />
-        <p>{loaderData.message}</p>
-      </section>
-  );
+  return <p>{loaderData.message}</p>;
 }
