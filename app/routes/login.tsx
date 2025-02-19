@@ -1,5 +1,6 @@
+import type { ActionFunctionArgs, HeadersFunction } from 'react-router';
 import { ApiMessage } from '~/components/ApiMessage';
-import { Form, createServerError, validateFormData } from '~/components/Form';
+import { Form, validateFormData } from '~/components/Form';
 import type { ValidationResult } from '~/components/Form/validateFormData';
 import { LoginFooter } from '~/components/LoginFooter';
 import { SubmitButton } from '~/components/SubmitButton';
@@ -7,40 +8,58 @@ import { EmailField } from '~/modules/EmailField';
 import { PasswordField } from '~/modules/PasswordField';
 import { validatePassword } from '~/modules/PasswordField';
 import { isEmail } from '~/modules/validation';
-import type { Route } from './+types/login';
+import { createResponse } from '~/utils/response';
+
+export const headers: HeadersFunction = () => {
+  return new Headers({
+    'Content-Type': 'application/json'
+  });
+};
 
 
-export async function action({
-  request,
-}: Route.ActionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
+  const email = formData.get('email');
+  const password = formData.get('password');
 
+  // Check for empty fields first
+  const errors: Record<string, string> = {};
+
+  if (!email) {
+    errors.email = 'Email is required';
+  }
+
+  if (!password) {
+    errors.password = 'Password is required';
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return createResponse({ success: false, errors }, 422);
+  }
+
+  // Then validate format if fields are present
   const result = validateFormData(formData, {
     email: isEmail,
     password: validatePassword
   });
 
   if (!result.success) {
-    return { errors: result.errors };
+    return createResponse({ success: false, errors: result.errors }, 400);
   }
 
   try {
     if (result.data.email !== 'test@example.com' || result.data.password !== 'Password123!') {
-      return createServerError('Invalid email or password', 401);
+      return createResponse({ success: false, error: 'Invalid email or password' }, 401);
     }
 
-    return {
-      success: true,
-      data: result.data
-    };
+    return createResponse({ success: true, data: result.data });
   } catch (error) {
     console.error('Login error:', error);
 
-    if (error instanceof Error) {
-      return createServerError(error.message, 500);
-    }
-
-    return createServerError('An unexpected error occurred during login', 500);
+    return createResponse({
+      success: false,
+      error: error instanceof Error ? error.message : 'An unexpected error occurred'
+    }, 500);
   }
 }
 
@@ -48,7 +67,7 @@ type LoginFormProps = {
   actionData: ValidationResult<{ email: string; password: string }> | undefined;
 };
 
-export default function Login({ actionData }: LoginFormProps) {
+export default function Login({ actionData }: Readonly<LoginFormProps>) {
 
   return (
     <div className="login-container">

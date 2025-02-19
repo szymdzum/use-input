@@ -7,7 +7,7 @@ import type { FormProps } from 'react-router';
 function Form({
     method = 'POST',
     noValidate = true,
-    ...props }: FormProps)
+    ...props }: Readonly<FormProps>)
   {
   return <RouterForm
     method={method}

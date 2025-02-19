@@ -1,5 +1,6 @@
 import { createRequestHandler } from '@react-router/express';
 import express from 'express';
+import type { Express } from 'express';
 import 'react-router';
 
 declare module 'react-router' {
@@ -8,7 +9,13 @@ declare module 'react-router' {
   }
 }
 
-const app = express();
+const app: Express = express();
+
+// Disable X-Powered-By header for security
+app.disable('x-powered-by');
+
+// Basic JSON middleware
+app.use(express.json());
 
 app.use(
   createRequestHandler({
