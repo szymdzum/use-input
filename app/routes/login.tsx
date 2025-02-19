@@ -1,29 +1,15 @@
 import type { ActionFunctionArgs, HeadersFunction } from 'react-router';
 import { ApiMessage } from '~/components/ApiMessage';
 import { Form, validateFormData } from '~/components/Form';
-import { type FormResponse, createFormResponse } from '~/components/Form/createFormResponse';
+
 import type { ValidationResult } from '~/components/Form/validateFormData';
 import { LoginFooter } from '~/components/LoginFooter';
 import { SubmitButton } from '~/components/SubmitButton';
 import { EmailField } from '~/modules/EmailField';
 import { PasswordField, validatePassword } from '~/modules/PasswordField';
 import { isEmail } from '~/modules/validation';
-import { createResponse } from '~/utils/response';
-
-export const headers: HeadersFunction = () => {
-  const headers = new Headers();
-  headers.set('Content-Type', 'application/json');
-  headers.set('X-Content-Type-Options', 'nosniff');
-  headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
-  headers.set('Pragma', 'no-cache');
-  return headers;
-};
-
-// Define the success data type for login
-type LoginData = {
-  email: string;
-  password: string;
-};
+import { createActionResponse } from '~/utils/actionResponse';
+import { AUTH_ERROR } from '../constants/errors';
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -32,21 +18,16 @@ export async function action({ request }: ActionFunctionArgs) {
 
   // Check for empty fields first
   const errors: Record<string, string> = {};
-
   if (!email) {
-    errors.email = 'Email is required';
+    errors.email = AUTH_ERROR.EMAIL_REQUIRED;
   }
-
   if (!password) {
-    errors.password = 'Password is required';
+    errors.password = AUTH_ERROR.PASSWORD_REQUIRED;
   }
 
-  if (Object.keys(errors).length > 0) {
-    return createFormResponse<LoginData>({
-      type: 'error',
-      errors,
-    });
-  }
+if (Object.keys(errors).length > 0) {
+  return createActionResponse.error(errors);
+}
 
   // Then validate format if fields are present
   const result = validateFormData(formData, {
@@ -55,22 +36,19 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   if (!result.success) {
-    return createResponse({ success: false, errors: result.errors }, 400);
+      return createActionResponse.error(result.errors);
   }
 
   try {
     if (result.data.email !== 'test@example.com' || result.data.password !== 'Password123!') {
-      return createResponse({ success: false, error: 'Invalid email or password' }, 401);
+        return createActionResponse.error({ auth: AUTH_ERROR.INVALID_CREDENTIALS });
     }
 
-    return createResponse({ success: true, data: result.data });
+    return createActionResponse.success(result.data);
   } catch (error) {
     console.error('Login error:', error);
 
-    return createResponse({
-      success: false,
-      error: error instanceof Error ? error.message : 'An unexpected error occurred'
-    }, 500);
+      return createActionResponse.error({ auth: AUTH_ERROR.SERVER_ERROR });
   }
 }
 

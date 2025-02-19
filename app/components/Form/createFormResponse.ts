@@ -1,3 +1,4 @@
+
 // Success type with generic data
 type FormSuccess<T> = {
   type: 'success';
@@ -13,18 +14,20 @@ type FormError = {
 // Union type for all possible form responses
 export type FormResponse<T> = FormSuccess<T> | FormError;
 
-// Helper function to create responses
 export function createFormResponse<T>(result: {
   type: 'success' | 'error';
   data?: T;
   errors?: Record<string, string>;
-}): FormResponse<T> {
+}) {
   if (result.type === 'error') {
     return {
+
       type: 'error',
       errors: result.errors ?? {},
     };
   }
+
+  // For errors, return just the errors
 
   return {
     type: 'success',
