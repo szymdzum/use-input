@@ -65,16 +65,50 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
       {/* Example Section */}
       <section className="example">
-        <h2>Simple to Use</h2>
+        <h2>Build Accessible Forms Effortlessly</h2>
         <pre className="code-block">
           <code>{`const EmailField = () => {
-  const { inputProps, error } = useInput({
+  const {
+    value,
+    error,
+    touched,
+    inputProps,
+    labelProps,
+    descriptionProps,
+    errorMessageProps
+  } = useInput({
     name: "email",
-    label: "Email",
-    validation: isEmail
+    label: "Email Address",
+    description: "We'll never share your email",
+    validation: isEmail,
+    required: true
   });
 
-  return <Input {...inputProps} error={error} />;
+  return (
+    <div className="field-wrapper">
+      <label {...labelProps}>
+        {labelProps.children}
+        {inputProps.required && <span aria-hidden="true">*</span>}
+      </label>
+
+      <input
+        {...inputProps}
+        className={error ? "input-error" : "input"}
+      />
+
+      {!error && (
+        <div {...descriptionProps} className="description">
+          {descriptionProps.children}
+        </div>
+      )}
+
+      {touched && error && (
+        <div {...errorMessageProps} className="error">
+          {error}
+        </div>
+      )}
+    </div>
+  );
 };`}</code>
         </pre>
       </section>
