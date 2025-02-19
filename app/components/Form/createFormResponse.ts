@@ -18,16 +18,18 @@ export function createFormResponse<T>(result: {
   type: 'success' | 'error';
   data?: T;
   errors?: Record<string, string>;
-}) {
+}): FormResponse<T> {
   if (result.type === 'error') {
     return {
-
       type: 'error',
       errors: result.errors ?? {},
     };
   }
 
   // For errors, return just the errors
+  if (!result.data) {
+    throw new Error('Data is required for success response');
+  }
 
   return {
     type: 'success',
