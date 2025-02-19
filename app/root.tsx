@@ -1,34 +1,37 @@
+import type { ReactNode } from 'react';
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
-  isRouteErrorResponse,
+  ScrollRestoration
 } from 'react-router';
+import { isRouteErrorResponse, useRouteError } from 'react-router';
+import { Footer } from './components/Footer';
+import { Header } from './components/Header';
 
-import type { ReactNode } from 'react';
-import type { Route } from './+types/root';
-import NavBar from './components/NavBar/NavBar';
-import { links } from './links'; // Import the links array
-export { links }; // Re-export the links array
+export { links } from './links';
 
-export function Layout({ children }: { children: ReactNode }) {
+import './styles/variables.css';
+import './styles/header.css';
+import './styles/input.css';
+import './styles/login.css';
+import './styles/theme-toggle.css';
+import './styles/home.css';
+import './styles/error.css';
+
+// Document component to handle the HTML structure
+function Document({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-         <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
-        <main>
-          {children}
-          <NavBar />
-        </main>
-
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -36,35 +39,67 @@ export function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-export default function App() {
-  return <Outlet />;
+// Layout component for the content structure
+function Layout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = 'Oops!';
-  let details = 'An unexpected error occurred.';
-  let stack: string | undefined;
-
-  if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? '404' : 'Error';
-    details =
-      error.status === 404
-        ? 'The requested page could not be found.'
-        : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
-  }
+export function ErrorBoundary() {
+  const error = useRouteError();
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <Document>
+      <Header />
+      <main className="error-container">
+        {isRouteErrorResponse(error) ? (
+          <div className="error-content">
+            <div className="error-meme">
+              <img
+                src="/images/404-cat.png"
+                alt="Confused cat"
+                className="error-image"
+              />
+              <h1 className="error-title">
+                4😺4
+              </h1>
+              <p className="error-message">
+                Oops! This page pulled a disappearing act...
+                <br />
+                <span className="error-subtitle">Just like my motivation to find it!</span>
+              </p>
+            </div>
+          </div>
+        ) : error instanceof Error ? (
+          <>
+            <h1>Error</h1>
+            <p>{error.message}</p>
+          </>
+        ) : (
+          <h1>Unknown Error</h1>
+        )}
+        <div className="error-actions">
+          <a href="/" className="error-button">
+            Take me back to safety →
+          </a>
+        </div>
+      </main>
+    </Document>
+  );
+}
+
+export default function App() {
+  // Only wrap Outlet with Layout once
+  return (
+    <Document>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </Document>
   );
 }

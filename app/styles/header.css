@@ -1,0 +1,82 @@
+/* Header container */
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+  z-index: 100;
+}
+
+/* Navigation layout */
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navigation links container */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  margin: 0 2rem;
+}
+
+.nav-links a {
+  color: var(--color-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--color-foreground);
+}
+
+/* User actions section */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-link {
+  color: var(--color-foreground);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s;
+}
+
+.login-link:hover {
+  background: var(--color-border);
+}
+
+/* Mobile menu button - hidden by default on desktop */
+.mobile-menu {
+  display: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+}
+
+.brand {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+  text-decoration: none;
+  flex-shrink: 0;
+}

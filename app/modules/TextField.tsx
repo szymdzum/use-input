@@ -1,4 +1,4 @@
-import { Input } from '~/components/Input/Input';
+import { Input } from '~/components/Input';
 
 export const TextField = () => {
   return (

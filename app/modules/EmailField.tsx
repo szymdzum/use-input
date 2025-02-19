@@ -1,4 +1,4 @@
-import { Input } from '~/components/Input/Input';
+import { Input } from '~/components/Input';
 import { isEmail } from './validation';
 
 export const EmailField = () => {

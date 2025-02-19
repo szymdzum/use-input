@@ -1,0 +1,24 @@
+/* Footer container */
+footer {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+/* Footer content */
+footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Footer text */
+footer p {
+  text-align: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  footer {
+    padding: 1.5rem 0;
+  }
+}
