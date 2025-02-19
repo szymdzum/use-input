@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import type { ValidationRule } from '~/modules/validation';
 import type { InputChange, InputFocus } from '~/types/react';
+import { useServerValidation } from './useServerValidation';
 
 export type UseInputProps = {
   name: string;
@@ -22,20 +23,28 @@ export const useInput = ({
   description,
 }: UseInputProps) => {
   const [value, setValue] = useState<string>('');
-  const [error, setError] = useState<string | null>(null);
+  const [clientError, setClientError] = useState<string | null>(null);
   const [isDirty, setIsDirty] = useState(false);
+  const [hasServerError, setHasServerError] = useState(false);
+
+  // Get server-side validation error
+  const serverError = useServerValidation(name);
+
+  // Use server error if present and not cleared, otherwise use client error
+  const error = (serverError && !hasServerError) ? serverError : clientError;
 
   const onBlur = useCallback((event: InputFocus) => {
     const inputValue = getInputValue(event);
     const validationError = validation(inputValue);
-    setError(validationError);
+    setClientError(validationError);
   }, [validation]);
 
   const onChange = useCallback((event: InputChange) => {
     const newInputValue = getInputValue(event);
     setValue(newInputValue);
     setIsDirty(true);
-    setError(null);
+    setClientError(null);
+    setHasServerError(true); // Mark server error as handled
   }, []);
 
   const isValid = useMemo(() => {
