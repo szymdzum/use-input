@@ -11,7 +11,7 @@ import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 
 export { links } from './links';
-
+//  you need to make up your mind about the styles
 import './styles/variables.css';
 import './styles/header.css';
 import './styles/input.css';
@@ -50,6 +50,35 @@ function Layout({ children }: { children: ReactNode }) {
   );
 }
 
+function ErrorContent({ error }: { error: unknown }) {
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div className="error-content">
+        <div className="error-meme">
+          <img src="/images/404-cat.png" alt="Confused cat" className="error-image" />
+          <h1 className="error-title">4😺4</h1>
+          <p className="error-message">
+            Oops! This page pulled a disappearing act...
+            <br />
+            <span className="error-subtitle">Just like my motivation to find it!</span>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error instanceof Error) {
+    return (
+      <>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+      </>
+    );
+  }
+
+  return <h1>Unknown Error</h1>;
+}
+
 export function ErrorBoundary() {
   const error = useRouteError();
 
@@ -57,32 +86,7 @@ export function ErrorBoundary() {
     <Document>
       <Header />
       <main className="error-container">
-        {isRouteErrorResponse(error) ? (
-          <div className="error-content">
-            <div className="error-meme">
-              <img
-                src="/images/404-cat.png"
-                alt="Confused cat"
-                className="error-image"
-              />
-              <h1 className="error-title">
-                4😺4
-              </h1>
-              <p className="error-message">
-                Oops! This page pulled a disappearing act...
-                <br />
-                <span className="error-subtitle">Just like my motivation to find it!</span>
-              </p>
-            </div>
-          </div>
-        ) : error instanceof Error ? (
-          <>
-            <h1>Error</h1>
-            <p>{error.message}</p>
-          </>
-        ) : (
-          <h1>Unknown Error</h1>
-        )}
+        <ErrorContent error={error} />
         <div className="error-actions">
           <a href="/" className="error-button">
             Take me back to safety →
@@ -92,7 +96,6 @@ export function ErrorBoundary() {
     </Document>
   );
 }
-
 export default function App() {
   // Only wrap Outlet with Layout once
   return (
