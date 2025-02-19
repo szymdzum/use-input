@@ -1,0 +1,71 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.field input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 2px var(--color-border-focus);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.field input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 2px var(--color-error);
+}
+
+.error {
+  font-size: 0.75rem;
+  color: var(--color-error);
+}
+
+.description {
+  font-size: 0.75rem;
+  color: var(--color-description);
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 38px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.forgot-password {
+  display: block;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  color: var(--color-border-focus);
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}

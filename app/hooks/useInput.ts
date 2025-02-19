@@ -1,23 +1,37 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { ValidationRule } from '~/modules/validation';
 import type { InputChange, InputFocus } from '~/types/react';
-import { useServerValidation } from './useServerValidation';
 
-export const useInput = (
-  validationRule: ValidationRule = noValidation,
-  inputName?: string,
-): ValidationResult => {
+export type UseInputProps = {
+  name: string;
+  validation?: ValidationRule;
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+  label: string;
+  description?: string;
+};
+
+export const useInput = ({
+  name,
+  validation = noValidation,
+  type = 'text',
+  required = false,
+  placeholder,
+  label,
+  description,
+}: UseInputProps) => {
   const [value, setValue] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isDirty, setIsDirty] = useState(false);
 
-  const onBlurValidate = useCallback((event: InputFocus) => {
+  const onBlur = useCallback((event: InputFocus) => {
     const inputValue = getInputValue(event);
-    const validationError = validationRule(inputValue);
+    const validationError = validation(inputValue);
     setError(validationError);
-  }, [validationRule]); // Wont change for now.
+  }, [validation]);
 
-  const onChangeClear = useCallback((event: InputChange) => {
+  const onChange = useCallback((event: InputChange) => {
     const newInputValue = getInputValue(event);
     setValue(newInputValue);
     setIsDirty(true);
@@ -30,53 +44,33 @@ export const useInput = (
     return hasNoError && hasValue;
   }, [error, value]);
 
-  // Server-side validation handling
-  const serverError = useServerValidation(inputName || '');
-
-  useEffect(() => {
-    if (inputName && serverError) {
-      setError(serverError);
-      setIsDirty(true);
-    }
-  }, [inputName, serverError]);
-
-  const validationResult: ValidationResult = {
-    value,
+  // Return everything needed for the input
+  return {
+    inputProps: {
+      id: `input-${name}`,
+      name,
+      type,
+      value,
+      required,
+      placeholder,
+      onChange,
+      onBlur,
+      'aria-invalid': Boolean(error),
+      'aria-describedby': error ? `${name}-error` : undefined,
+    },
+    labelProps: {
+      htmlFor: `input-${name}`,
+      children: label,
+    },
     error,
+    description,
     isValid,
     isDirty,
-    onBlurValidate,
-    onChangeClear,
   };
-
-  return validationResult;
 };
 
 const noValidation: ValidationRule = () => null;
 
-const getInputValue = (
-  event: InputChange | InputFocus
-): string => {
+const getInputValue = (event: InputChange | InputFocus): string => {
   return event?.target?.value?.trim() ?? '';
-};
-
-type ValidationResult = {
-  /** Current value of the input field */
-  value: string;
-  /** Current error message, null if no error exists */
-  error: string | null;
-  /** Indicates whether the input is valid */
-  isValid: boolean;
-  /** Indicates whether the input has been modified by the user */
-  isDirty: boolean;
-  /**
-   * (onBlur) Validates the input value using the provided validator function
-   * @param event The focus event object
-   */
-  onBlurValidate: (event: InputFocus) => void;
-  /**
-   * (onChange) Handles input changes, updates the value and clears existing errors
-   * @param event The change event object
-   */
-  onChangeClear: (event: InputChange) => void;
 };

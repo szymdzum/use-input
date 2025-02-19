@@ -23,10 +23,10 @@ export function Header() {
               <span className="sr-only">Search</span>
               🔍
             </button>
-            <button type="button">
-              <span className="sr-only">Account</span>
+            <Link to="/login">
+              <span className="sr-only">Login</span>
               👤
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
