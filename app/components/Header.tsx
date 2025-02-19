@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import '../styles/header.css';
 
 export function Header() {
   return (

@@ -1,0 +1,42 @@
+/* Header container */
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+/* Navigation layout */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+/* Navigation links container */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+/* User actions section */
+.user-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Mobile menu button - hidden by default on desktop */
+.mobile-menu {
+  display: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+}

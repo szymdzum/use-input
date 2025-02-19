@@ -1,5 +1,5 @@
 import type { Route } from './+types/root';
-import stylesheet from './app.css?url';
+import appStylesheet from './styles/app.css?url';
 
 export const links: Route.LinksFunction = () => [
   // Preconnect links
@@ -17,5 +17,5 @@ export const links: Route.LinksFunction = () => [
   },
 
   // Local stylesheet
-  { rel: 'stylesheet', href: stylesheet },
+  { rel: 'stylesheet', href: appStylesheet },
 ];
