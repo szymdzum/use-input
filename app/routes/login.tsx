@@ -61,7 +61,7 @@ export default function Login() {
     <div className="login-container">
       <div className="login-card">
         <h1>Welcome Back</h1>
- <Form method="POST" onSubmit={handleSubmit} noValidate>
+        <Form method="POST" onSubmit={handleSubmit} noValidate>
           <EmailField />
           <PasswordField />
           <button

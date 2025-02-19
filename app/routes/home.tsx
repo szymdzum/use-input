@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import type { Route } from './+types/home';
 import '../styles/home.css';
+import { Layers, Shield, Zap } from 'lucide-react';
 
 export function meta(_: Route.MetaArgs) {
   return [
@@ -34,16 +35,30 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <h2>Key Features</h2>
         <div className="features-grid">
           <div className="feature-card">
+            <div className="feature-icon">
+              <Layers size={24} />
+            </div>
             <h3>Progressive Enhancement</h3>
             <p>Works without JavaScript, enhances with it. Server-side validation first, client-side for better UX.</p>
+            <a href="/docs/progressive-enhancement" className="feature-link">Learn more →</a>
           </div>
+
           <div className="feature-card">
+            <div className="feature-icon">
+              <Shield size={24} />
+            </div>
             <h3>Web Standards</h3>
             <p>Built on HTML5 form validation and ARIA attributes. Follows best practices for accessibility.</p>
+            <a href="/docs/web-standards" className="feature-link">Learn more →</a>
           </div>
+
           <div className="feature-card">
+            <div className="feature-icon">
+              <Zap size={24} />
+            </div>
             <h3>React Router Integration</h3>
             <p>Seamlessly works with React Router's form handling and server actions.</p>
+            <a href="/docs/router-integration" className="feature-link">Learn more →</a>
           </div>
         </div>
       </section>
