@@ -13,9 +13,11 @@ import { Header } from './components/Header';
 export { links } from './links';
 
 import './styles/variables.css';
+import './styles/header.css';
 import './styles/input.css';
 import './styles/login.css';
 import './styles/theme-toggle.css';
+import './styles/home.css';
 
 // Document component to handle the HTML structure
 function Document({ children }: { children: ReactNode }) {

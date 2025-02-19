@@ -29,11 +29,12 @@ export async function action({
 }
 
 export default function Login() {
-
-   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     const form = e.currentTarget as HTMLFormElement;
+
+    // Check for required fields
     const requiredFields = form.querySelectorAll('[required]');
     let hasEmptyRequired = false;
 
@@ -41,11 +42,14 @@ export default function Login() {
       if (!(field as HTMLInputElement).value) {
         hasEmptyRequired = true;
         (field as HTMLInputElement).focus();
-        break; // Exit loop after finding first empty field
+        break;
       }
     }
 
-    if (hasEmptyRequired) {
+    // Check for error states
+    const invalidFields = form.querySelectorAll('[aria-invalid="true"]');
+
+    if (hasEmptyRequired || invalidFields.length > 0) {
       e.preventDefault();
       return;
     }
