@@ -27,5 +27,9 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.fontSize": 16
+  "editor.fontSize": 16,
+  "sonarlint.connectedMode.project": {
+    "connectionId": "szymdzum",
+    "projectKey": "szymdzum_use-input"
+  }
 }
