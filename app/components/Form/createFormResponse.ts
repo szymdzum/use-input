@@ -1,29 +1,42 @@
+// Success type with generic data
 type FormSuccess<T> = {
-  success: true;
+  type: 'success';
   data: T;
 };
 
+// Error type for form validation/submission errors
 type FormError = {
-  success: false;
+  type: 'error';
   errors: Record<string, string>;
 };
 
+// Union type for all possible form responses
 export type FormResponse<T> = FormSuccess<T> | FormError;
 
+// Helper function to create responses
 export function createFormResponse<T>(result: {
-  success: boolean;
+  type: 'success' | 'error';
   data?: T;
   errors?: Record<string, string>;
 }): FormResponse<T> {
-  if (!result.success) {
+  if (result.type === 'error') {
     return {
-      success: false,
+      type: 'error',
       errors: result.errors ?? {},
     };
   }
 
   return {
-    success: true,
+    type: 'success',
     data: result.data as T,
   };
+}
+
+// Type guard helpers for checking response type
+export function isFormSuccess<T>(response: FormResponse<T>): response is FormSuccess<T> {
+  return response.type === 'success';
+}
+
+export function isFormError<T>(response: FormResponse<T>): response is FormError {
+  return response.type === 'error';
 }

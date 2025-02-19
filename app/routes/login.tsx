@@ -1,6 +1,7 @@
 import type { ActionFunctionArgs, HeadersFunction } from 'react-router';
 import { ApiMessage } from '~/components/ApiMessage';
 import { Form, validateFormData } from '~/components/Form';
+import { type FormResponse, createFormResponse } from '~/components/Form/createFormResponse';
 import type { ValidationResult } from '~/components/Form/validateFormData';
 import { LoginFooter } from '~/components/LoginFooter';
 import { SubmitButton } from '~/components/SubmitButton';
@@ -18,6 +19,11 @@ export const headers: HeadersFunction = () => {
   return headers;
 };
 
+// Define the success data type for login
+type LoginData = {
+  email: string;
+  password: string;
+};
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -36,7 +42,10 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return createResponse({ success: false, errors }, 422);
+    return createFormResponse<LoginData>({
+      type: 'error',
+      errors,
+    });
   }
 
   // Then validate format if fields are present
