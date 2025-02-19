@@ -9,7 +9,13 @@ import {
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
+
 export { links } from './links';
+
+import './styles/variables.css';
+import './styles/input.css';
+import './styles/login.css';
+import './styles/theme-toggle.css';
 
 // Document component to handle the HTML structure
 function Document({ children }: { children: ReactNode }) {

@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import '../styles/header.css';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Header() {
   return (
@@ -19,10 +20,7 @@ export function Header() {
 
           {/* Auth/User Section */}
           <div className="user-actions">
-            <button type="button">
-              <span className="sr-only">Search</span>
-              🔍
-            </button>
+            <ThemeToggle />
             <Link to="/login">
               <span className="sr-only">Login</span>
               👤

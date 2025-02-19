@@ -1,0 +1,32 @@
+:root {
+  /* Base Colors - these don't change with theme */
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-light: #60a5fa;
+  --color-error: #ef4444;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+}
+
+/* Light Theme (default) */
+:root[data-theme="light"] {
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-focus: var(--color-primary);
+}
+
+/* Dark Theme */
+:root[data-theme="dark"] {
+  --color-background: #0f172a;
+  --color-foreground: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-border: #1e293b;
+}
+
+/* Global Styles */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}

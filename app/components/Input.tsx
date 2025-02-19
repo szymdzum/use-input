@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import type { UseInputProps } from '~/hooks/useInput';
 import { useInput } from '~/hooks/useInput';
-import '../styles/input.css';
+
 
 export const Input = (props: UseInputProps): ReactElement => {
   const { inputProps, labelProps, error, description } = useInput(props);

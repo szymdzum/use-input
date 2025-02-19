@@ -14,11 +14,18 @@ type FormProps = {
   onComponentError?: (error: Error, info: ErrorInfo) => void;
   /** Form submission error handler */
   onError?: FormEvent;
+  /** Form submission success handler */
+  onSuccess?: FormEvent;
+  /** Whether to show a loading state */
+  isSubmitting?: boolean;
+  /** Form submission success handler */
+  onSubmit?: FormEvent;
 };
 
 const Form = ({
   method = 'POST',
   noValidate = false,
+  isSubmitting = false,
   ...props
 }: FormProps) => (
   <ErrorBoundary
