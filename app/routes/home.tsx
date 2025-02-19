@@ -14,7 +14,7 @@ export function loader({ context }: Route.LoaderArgs) {
   return { message: context.SERVER_VALUE };
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Home({ loaderData }: Readonly<Route.ComponentProps>) {
   return (
     <div className="container">
       {/* Hero Section */}
@@ -26,7 +26,14 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         </p>
         <div className="cta-buttons">
           <Link to="/login" className="cta-primary">Try Demo</Link>
-          <a href="https://github.com/your-repo" className="cta-secondary">View on GitHub</a>
+          <a
+            href="https://github.com/szymdzum/use-input"
+            className="cta-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub
+          </a>
         </div>
       </section>
 

@@ -5,15 +5,17 @@ import type { ValidationResult } from '~/components/Form/validateFormData';
 import { LoginFooter } from '~/components/LoginFooter';
 import { SubmitButton } from '~/components/SubmitButton';
 import { EmailField } from '~/modules/EmailField';
-import { PasswordField } from '~/modules/PasswordField';
-import { validatePassword } from '~/modules/PasswordField';
+import { PasswordField, validatePassword } from '~/modules/PasswordField';
 import { isEmail } from '~/modules/validation';
 import { createResponse } from '~/utils/response';
 
 export const headers: HeadersFunction = () => {
-  return new Headers({
-    'Content-Type': 'application/json'
-  });
+  const headers = new Headers();
+  headers.set('Content-Type', 'application/json');
+  headers.set('X-Content-Type-Options', 'nosniff');
+  headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
+  headers.set('Pragma', 'no-cache');
+  return headers;
 };
 
 
@@ -68,7 +70,6 @@ type LoginFormProps = {
 };
 
 export default function Login({ actionData }: Readonly<LoginFormProps>) {
-
   return (
     <div className="login-container">
       <div className="login-card">
@@ -79,7 +80,7 @@ export default function Login({ actionData }: Readonly<LoginFormProps>) {
             className="error-message"
           />
         )}
-        <Form method="POST" noValidate>
+        <Form>
           <EmailField />
           <PasswordField />
           <SubmitButton label="Sign In" />
