@@ -8,6 +8,7 @@ type ApiMessageProps = {
   className?: string;
 };
 
+// Please, not like that fucking mess.
 export function ApiMessage({ message, linkText, linkTo, className }: ApiMessageProps) {
   return (
     <div className={`api-message ${className ?? ''}`} role="alert">

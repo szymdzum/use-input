@@ -11,7 +11,7 @@ import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 
 export { links } from './links';
-
+//  you need to make up your mind about the styles
 import './styles/variables.css';
 import './styles/header.css';
 import './styles/input.css';

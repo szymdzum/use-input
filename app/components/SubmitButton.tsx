@@ -19,6 +19,8 @@ export function SubmitButton({
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
 
+  // don't you think it's a bit too much for a button?
+
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     const form = formId
       ? document.getElementById(formId) as HTMLFormElement
