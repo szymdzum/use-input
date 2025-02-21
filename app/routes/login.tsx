@@ -11,6 +11,30 @@ import { isEmail } from '~/modules/validation';
 import { createActionResponse } from '~/utils/actionResponse';
 import { AUTH_ERROR } from '../constants/errors';
 
+/**
+ * Processes a login request by extracting and validating form data.
+ *
+ * Retrieves the email and password from the request's form data, checks for their presence,
+ * validates the formats using designated validation functions, and then compares the credentials
+ * against preset values. Returns an error response if any validations fail or if the credentials
+ * do not match; otherwise, returns a success response with the validated data.
+ *
+ * @param request - The request object containing the incoming form data.
+ * @returns A promise that resolves with an action response containing either success data or an error object.
+ *
+ * @example
+ * const response = await action({ request });
+ * if (response.error) {
+ *   // Handle error: missing fields, invalid formats, or incorrect credentials.
+ * } else {
+ *   // Process successful login with data from response.
+ * }
+ *
+ * @remarks
+ * Error responses utilize constants from the AUTH_ERROR module for consistency. The function
+ * handles missing field errors, format validation failures, authentication mismatches, and unexpected
+ * server errors by returning respective error responses.
+ */
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const email = formData.get('email');
