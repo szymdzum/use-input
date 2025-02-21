@@ -1,4 +1,6 @@
-// Type definitions
+import type { Validator } from '~/components/Form/validateFormData';
+import { AUTH_ERROR } from '~/constants/errors';
+
 export type ValidationRule = (value: string) => string | null;
 
 export type Validation = ValidationRule | ValidationRule[];
@@ -29,11 +31,16 @@ export const isString: ValidationRule = (value) => {
   return null;
 };
 
-export const isEmail: ValidationRule = (value) => {
+export const isEmail: Validator = (value) => {
+  if (!value) {
+    return AUTH_ERROR.EMAIL_REQUIRED;
+  }
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(value)) {
-    return 'Please enter a valid email address.';
+    return AUTH_ERROR.INVALID_EMAIL;
   }
+
   return null;
 };
 
@@ -56,3 +63,14 @@ export const usernameRules = combineRules(
   minLength(3),
   maxLength(20)
 );
+
+export const validatePassword: Validator = (value) => {
+  if (!value) {
+    return AUTH_ERROR.PASSWORD_REQUIRED;
+  }
+  if (value.length < 8) {
+    return AUTH_ERROR.INVALID_PASSWORD;
+  }
+
+  return null;
+};

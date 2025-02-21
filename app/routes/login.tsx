@@ -13,23 +13,6 @@ import { AUTH_ERROR } from '../constants/errors';
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  const email = formData.get('email');
-  const password = formData.get('password');
-
-  // Check for empty fields first
-  const errors: Record<string, string> = {};
-  if (!email) {
-    errors.email = AUTH_ERROR.EMAIL_REQUIRED;
-  }
-  if (!password) {
-    errors.password = AUTH_ERROR.PASSWORD_REQUIRED;
-  }
-
-if (Object.keys(errors).length > 0) {
-  return createActionResponse.error(errors);
-}
-
-  // Then validate format if fields are present
   const result = validateFormData(formData, {
     email: isEmail,
     password: validatePassword
