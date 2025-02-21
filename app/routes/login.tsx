@@ -17,7 +17,7 @@ export async function action({ request }: ActionFunctionArgs) {
     email: isEmail,
     password: validatePassword
   });
-
+  console.log(result);
   if (!result.success) {
       return createActionResponse.error(result.errors);
   }

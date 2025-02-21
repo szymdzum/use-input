@@ -23,20 +23,6 @@ export type ValidationFailure<T> = {
 
 export type ValidationResult<T> = ValidationSuccess<T> | ValidationFailure<T>;
 
-export type ServerError = {
-  success: false;
-  error: string;
-  status: number;
-};
-
-export function createServerError(message: string, status = 400): ServerError {
-  return {
-    success: false,
-    error: message,
-    status,
-  };
-}
-
 export function validateFormData<Schema extends FormSchema>(
   formData: FormData,
   schema: Schema,
@@ -53,19 +39,12 @@ export function validateFormData<Schema extends FormSchema>(
       errors[key] = error;
       continue;
     }
-
     data[key] = stringValue;
   }
 
   if (Object.keys(errors).length > 0) {
-    return {
-      success: false,
-      errors: errors as ValidationErrors<ValidatedData<Schema>>,
-    };
+    return { success: false, errors };
   }
 
-  return {
-    success: true,
-    data: data as ValidatedData<Schema>,
-  };
+  return { success: true, data: data as ValidatedData<Schema> };
 }
