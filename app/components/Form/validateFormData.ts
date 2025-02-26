@@ -10,32 +10,14 @@ export type ValidationErrors<T> = {
   [K in keyof T]?: string;
 };
 
-// Result types
-export type ValidationSuccess<T> = {
-  success: true;
-  data: T;
+// Result types using consistent naming
+export type ValidationStatus = 'success' | 'error';
+
+export type ValidationResult<T> = {
+  status: ValidationStatus;
+  data?: T;
+  errors?: ValidationErrors<T>;
 };
-
-export type ValidationFailure<T> = {
-  success: false;
-  errors: ValidationErrors<T>;
-};
-
-export type ValidationResult<T> = ValidationSuccess<T> | ValidationFailure<T>;
-
-export type ServerError = {
-  success: false;
-  error: string;
-  status: number;
-};
-
-export function createServerError(message: string, status = 400): ServerError {
-  return {
-    success: false,
-    error: message,
-    status,
-  };
-}
 
 export function validateFormData<Schema extends FormSchema>(
   formData: FormData,
@@ -53,19 +35,18 @@ export function validateFormData<Schema extends FormSchema>(
       errors[key] = error;
       continue;
     }
-
     data[key] = stringValue;
   }
 
   if (Object.keys(errors).length > 0) {
     return {
-      success: false,
-      errors: errors as ValidationErrors<ValidatedData<Schema>>,
+      status: 'error',
+      errors
     };
   }
 
   return {
-    success: true,
-    data: data as ValidatedData<Schema>,
+    status: 'success',
+    data: data as ValidatedData<Schema>
   };
 }
