@@ -12,14 +12,6 @@ import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 
 export { links } from './links';
-//  you need to make up your mind about the styles
-import './styles/variables.css';
-import './styles/header.css';
-import './styles/input.css';
-import './styles/login.css';
-import './styles/theme-toggle.css';
-import './styles/home.css';
-import './styles/error.css';
 
 // Document component to handle the HTML structure
 function Document({ children }: { children: ReactNode }) {
@@ -56,7 +48,6 @@ function ErrorContent({ error }: { error: unknown }) {
     return (
       <div className="error-content">
         <div className="error-meme">
-          <img src="/images/404-cat.png" alt="Confused cat" className="error-image" />
           <h1 className="error-title">4😺4</h1>
           <p className="error-message">
             Oops! This page pulled a disappearing act...

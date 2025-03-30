@@ -24,7 +24,6 @@ export const EmailField = () => {
       placeholder="your@email.com"
       description="Please enter your email address"
       validation={isEmail}
-      required
     />
   );
 };
