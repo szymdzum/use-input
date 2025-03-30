@@ -1,7 +1,6 @@
+import { Layers, Shield, Zap } from 'lucide-react';
 import { Link } from 'react-router';
 import type { Route } from './+types/home';
-import '../styles/home.css';
-import { Layers, Shield, Zap } from 'lucide-react';
 
 export function meta(_: Route.MetaArgs) {
   return [
@@ -21,7 +20,7 @@ export default function Home({ loaderData }: Readonly<Route.ComponentProps>) {
       <section className="hero">
         <h1>useInput</h1>
         <p className="hero-text">
-          A modern form validation library for React Router that embraces web standards
+          A collection of form validation recipes for React Router that embrace web standards
           and progressive enhancement.
         </p>
         <div className="cta-buttons">
