@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@react-router/express": "^7.1.5",
-    "@react-router/node": "^7.1.5",
+    "@react-router/node": "^7.9.4",
     "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^8.17.14",
     "@types/three": "^0.173.0",
